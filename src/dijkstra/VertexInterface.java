@@ -1,8 +1,10 @@
-package tp04;
+package dijkstra;
 
 public interface VertexInterface {
-	/**
-	 * @return Identifiant du sommet
-	 */
+
+	public int getX();
+
+	public int getY();
+	
 	public String getLabel();
 }

@@ -1,4 +1,4 @@
-package tp04;
+package dijkstra;
 
 /**
  * @author tintin
