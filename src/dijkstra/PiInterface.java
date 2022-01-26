@@ -14,5 +14,5 @@ public interface PiInterface {
 	 * @param distance Nouvelle distance
 	 */
 	public void setDistance(VertexInterface vertex, int distance);
-
+	
 }

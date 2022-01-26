@@ -2,6 +2,10 @@ package maze;
 
 import dijkstra.VertexInterface;
 
+/**
+ * Class abstraite implémentant VertexInterface
+ * Représente une case du labyrinthe
+ */
 public abstract class MBox implements VertexInterface {
 	
 	MBox(int x, int y) {
@@ -10,7 +14,7 @@ public abstract class MBox implements VertexInterface {
 	}
 	
 	public int getX() {
-		return this.y;
+		return this.x;
 	}
 	
 	public int getY() {
