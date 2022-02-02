@@ -6,7 +6,7 @@ import java.util.HashMap;
  * Classe basée sur une HashMap servant à indiquer la distance d'un sommet 
  * pour l'algorithme de Dijkstra
  */
-public class Pi implements PiInterface {
+public final class Pi implements PiInterface {
 	private HashMap<VertexInterface, Integer> pi;
 	
 	public Pi() {

@@ -7,7 +7,7 @@ import java.util.HashMap;
  * Classe implementant HeapInterface
  * La classe représente un tas (dans l'ordre décroissant) contenant des VertexInterface
  */
-public class Heap implements HeapInterface {
+public final class Heap implements HeapInterface {
 	private ArrayList<VertexInterface> heap;
 	HashMap<VertexInterface, Integer> indices;
 	PiInterface pi;

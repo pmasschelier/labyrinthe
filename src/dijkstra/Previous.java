@@ -6,7 +6,7 @@ import java.util.HashMap;
  * Classe basée sur une HashMap servant à stocker la précédance pour chaque sommet
  * résultant de l'algorithme de Dijkstra
  */
-public class Previous implements PreviousInterface {
+public final class Previous implements PreviousInterface {
 	private HashMap<VertexInterface, VertexInterface> prev;
 	
 	public Previous() {
@@ -16,6 +16,7 @@ public class Previous implements PreviousInterface {
 	public VertexInterface getFather(VertexInterface vertex) {
 		return prev.get(vertex);
 	}
+	
 	public void setFather(VertexInterface son, VertexInterface father) {
 		prev.put(son,father);
 	}

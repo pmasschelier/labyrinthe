@@ -3,7 +3,7 @@ package dijkstra;
 import java.util.ArrayList;
 
 
-public class Dijkstra {
+public final class Dijkstra {
 	
 	/** @brief Méthode statique implémentant l'algorithme de Dijkstra
 	 * @param g Graphe sur lequel on veut executer l'algorithme

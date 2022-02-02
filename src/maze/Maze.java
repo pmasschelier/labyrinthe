@@ -11,11 +11,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class Maze implements GraphInterface {
+public final class Maze implements GraphInterface {
 
 	int sizeX, sizeY;
-	ArrayList<VertexInterface> vertices;
-	VertexInterface start, end;
+	ArrayList<MBox> vertices;
+	MBox start, end;
 	
 	
 	public Maze() {
@@ -142,20 +142,24 @@ public class Maze implements GraphInterface {
 		int i = v.getX(), j = v.getY();
 		int n = i + sizeX * j;
 		ArrayList<VertexInterface> neighbors = new ArrayList<VertexInterface>();
-
-		try {
-			if(i > 0 && this.vertices.get(i-1).getLabel() != "W") 
-				neighbors.add(this.vertices.get(n-1));
-			if(i < this.sizeX - 1 && this.vertices.get(n+1).getLabel() != "W") 
-				neighbors.add(this.vertices.get(n+1));
-			if(j > 0 && this.vertices.get(n-this.sizeX).getLabel() != "W") 
-				neighbors.add(this.vertices.get(n-this.sizeX));
-			if(j < this.sizeY - 1 && this.vertices.get(n+this.sizeX).getLabel() != "W") 
-				neighbors.add(this.vertices.get(n+this.sizeX));
-		}
-		catch(IndexOutOfBoundsException e) {
-			System.out.println(e + " : i : " + i + " (sizeX : " + sizeX + "), j : " + j + " (sizeY : " + sizeY + ")");
-		}
+		
+		int index;
+		index = n-1;
+		if(i > 0 && this.vertices.get(index).isAccessible())
+			neighbors.add(this.vertices.get(index));
+		
+		index = n+1;
+		if(i < this.sizeX - 1 && this.vertices.get(index).isAccessible()) 
+			neighbors.add(this.vertices.get(index));
+		
+		index = n-this.sizeX;
+		if(j > 0 && this.vertices.get(index).isAccessible())
+			neighbors.add(this.vertices.get(index));
+		
+		index = n + this.sizeX;
+		if(j < this.sizeY - 1 && this.vertices.get(index).isAccessible())
+			neighbors.add(this.vertices.get(index));
+		
 		return neighbors;
 	}
 	
@@ -172,7 +176,7 @@ public class Maze implements GraphInterface {
 	 * @return Liste des vertex ordonnées par lignes puis par colonnes
 	 */
 	public ArrayList<VertexInterface> getVertices() {
-		return this.vertices;
+		return new ArrayList<VertexInterface>(vertices);
 	}
 
 	/**
