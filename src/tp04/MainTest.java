@@ -1,10 +1,12 @@
 package tp04;
 
+import controller.MazeController;
 import dijkstra.Dijkstra;
 import dijkstra.PreviousInterface;
 import dijkstra.VertexInterface;
 import maze.Maze;
 import maze.MazeReadingException;
+import ui.Window;
 
 public class MainTest {
 
@@ -26,6 +28,10 @@ public class MainTest {
 		}
 		
 		printChars(tab);
+		
+		
+		MazeController mazectrl = new MazeController();
+		Window win = new Window(mazectrl);
 	}
 
 	static public void printChars(char[][] tab) {

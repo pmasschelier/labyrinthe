@@ -19,9 +19,25 @@ public final class Maze implements GraphInterface {
 	
 	
 	public Maze() {
-		this.vertices = new ArrayList<>();
-		this.sizeX = 0;
-		this.sizeY = 0;
+		vertices = new ArrayList<>();
+		sizeX = 0;
+		sizeY = 0;
+	}
+	
+	public Maze(int width, int height) {
+		createEmpty(width, height);
+	}
+	
+	public void createEmpty(int width, int height) {
+		this.vertices = new ArrayList<>(width * height);
+		this.sizeX = width;
+		this.sizeY = height;
+		
+		for(int j = 0; j < height; j++) {
+			for(int i = 0; i < width; i++) {
+				vertices.add(new EBox(i, j));
+			}
+		}
 	}
 	
 	
@@ -177,6 +193,44 @@ public final class Maze implements GraphInterface {
 	 */
 	public ArrayList<VertexInterface> getVertices() {
 		return new ArrayList<VertexInterface>(vertices);
+	}
+	
+	/** @brief Renvoie le tableau des cases du labyrinthe
+	 * @return Liste des boites ordonnées par lignes puis par colonnes
+	 */
+	public ArrayList<MBox> getBoxes() {
+		return vertices;
+	}
+	
+	/**
+	 * @param x numéro de la colonne
+	 * @param y numéro de la ligne
+	 * @return Boite situé à ces coordonnées
+	 */
+	public MBox getBox(int x, int y) {
+		return vertices.get(y * sizeX + x);
+	}
+	
+	/**
+	 * @param box case à mettre dans le labyrinthe
+	 */
+	public void setBox(MBox box) {
+		vertices.set(box.getY() * sizeX + box.getX(), box);
+	}
+	
+	
+	/**
+	 * @return Largeur du labyrinthe
+	 */
+	public int getSizeX() {
+		return sizeX;
+	}
+	
+	/**
+	 * @return Hauteur du labyrinthe
+	 */
+	public int getSizeY() {
+		return sizeY;
 	}
 
 	/**
