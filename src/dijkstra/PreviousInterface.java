@@ -1,5 +1,8 @@
 package dijkstra;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+
 public interface PreviousInterface {
 	
 	/**
@@ -13,4 +16,6 @@ public interface PreviousInterface {
 	 * @param father Père du sommet
 	 */
 	public void setFather(VertexInterface son, VertexInterface father);
+	
+	public ArrayDeque<VertexInterface> getShortestPathTo(VertexInterface target);
 }

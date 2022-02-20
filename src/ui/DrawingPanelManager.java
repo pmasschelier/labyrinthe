@@ -1,8 +1,11 @@
 package ui;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.stream.Collectors;
+
+import dijkstra.VertexInterface;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -15,6 +18,7 @@ import maze.MazeReadingException;
 public class DrawingPanelManager {
 	DrawingPanel panel;
 	Maze maze = null;
+	ArrayDeque<VertexInterface> path = null;
 	
 	static final HashMap<String, Color> tilesColors;
 	
@@ -31,8 +35,12 @@ public class DrawingPanelManager {
 		this.panel = panel;
 	}
 	
-	public void setMaze(Maze newmaze) {
-		maze = newmaze;
+	public void setMaze(Maze maze) {
+		this.maze = maze;
+	}
+	
+	public void setPath(ArrayDeque<VertexInterface> path) {
+		this.path = path;
 	}
 	
 	public void paintAllTiles(Graphics g) {		
@@ -41,13 +49,21 @@ public class DrawingPanelManager {
 		int w = panel.getWidth() / maze.getSizeX();
 		int h = panel.getHeight() / maze.getSizeY();
 		
-		for(MBox box : maze.getBoxes()) {
+		for(VertexInterface box : maze.getVertices()) {
 			g.setColor(tilesColors.get(box.getLabel()));
 			g.fillRect(box.getX() * w, box.getY() * h, w, h);
 		}
 	}
 	
 	public void paintPath(Graphics g) {
+		if(path != null && maze != null) {
+			int w = panel.getWidth() / maze.getSizeX();
+			int h = panel.getHeight() / maze.getSizeY();
 		
+			g.setColor(Color.RED);
+			for(VertexInterface coord : path) {
+				g.fillRect(coord.getX() * w, coord.getY() * h, w, h);
+			}
+		}
 	}
 }

@@ -1,9 +1,12 @@
 package controller;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import dijkstra.*;
 import maze.*;
 import ui.*;
 
@@ -13,7 +16,7 @@ public class MazeController {
 	DrawingPanel panel;
 	String filename = null;
 	boolean saved = true;
-	boolean arrivalPlaced = false, departurePlaced = false;
+	boolean displayPath = false;
 	String currentBoxLabel = "W";
 	
 	public MazeController() {
@@ -112,9 +115,20 @@ public class MazeController {
 		panel.notifyForUpdate();
 	}
 	
+	public void solve() {
+		PreviousInterface prev = Dijkstra.dijkstra(maze, maze.getStart());
+		
+		ArrayDeque<VertexInterface> path = prev.getShortestPathTo(maze.getEnd());
+		
+		panel.getDPMgr().setPath(path);
+		panel.notifyForUpdate();
+	}
+	
 	public void clickAt(int x, int y) {
 		if(maze == null)
 			return;
+		
+		panel.getDPMgr().setPath(null);
 		
 		int xi = x * maze.getSizeX() / panel.getWidth(), yi = y * maze.getSizeY() / panel.getHeight();
 		

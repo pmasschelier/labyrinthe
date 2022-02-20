@@ -1,5 +1,6 @@
 package dijkstra;
 
+import java.util.ArrayDeque;
 import java.util.HashMap;
 
 /**
@@ -19,5 +20,15 @@ public final class Previous implements PreviousInterface {
 	
 	public void setFather(VertexInterface son, VertexInterface father) {
 		prev.put(son,father);
+	}
+	
+	public ArrayDeque<VertexInterface> getShortestPathTo(VertexInterface target) {
+		ArrayDeque<VertexInterface> path = new ArrayDeque<>();
+		
+		VertexInterface current = target;
+		while((current = getFather(current)) != null)
+			path.addFirst(current);
+		
+		return path;
 	}
 }

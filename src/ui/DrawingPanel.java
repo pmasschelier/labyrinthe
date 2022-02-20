@@ -30,6 +30,7 @@ public class DrawingPanel extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		dpmgr.paintAllTiles(g);
+		dpmgr.paintPath(g);
 	}
 	
 	
