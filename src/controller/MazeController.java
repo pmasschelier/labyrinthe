@@ -37,10 +37,12 @@ public class MazeController {
 	}
 	
 	public void newVoidMaze(int width, int height) {
-		maze = new Maze(width, height);
-		updateMaze();
-		saved = false;
-		filename = null;
+		if(checkSaved()) {
+			maze = new Maze(width, height);
+			updateMaze();
+			saved = false;
+			filename = null;
+		}
 	}
 	
 	public void openMaze(String filename) {
@@ -54,7 +56,7 @@ public class MazeController {
 			
 		}
 		catch (MazeReadingException e) {
-			
+			JOptionPane.showMessageDialog(app, "Le fichier n'est pas au format requis !", "Erreur de format", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -116,7 +118,25 @@ public class MazeController {
 	}
 	
 	public void solve() {
+		if(maze == null) {
+			JOptionPane.showMessageDialog(app, "Aucun labyrinthe à résoudre", "Pas de labyrinthe", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		if(maze.getStart() == null) {
+			JOptionPane.showMessageDialog(app, "Le labyrinthe n'a pas de départ", "Absence de départ", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		if(maze.getEnd() == null) {
+			JOptionPane.showMessageDialog(app, "Le labyrinthe n'a pas d'arrivée", "Absence d'arrivée", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
 		PreviousInterface prev = Dijkstra.dijkstra(maze, maze.getStart());
+		
+		if(prev.getFather(maze.getEnd()) == null) {
+			JOptionPane.showMessageDialog(app, "Le labyrinthe n'a pas de solution", "Labyrinthe insoluble", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 		
 		ArrayDeque<VertexInterface> path = prev.getShortestPathTo(maze.getEnd());
 		
@@ -148,5 +168,10 @@ public class MazeController {
 		}
 		
 		panel.notifyForUpdate();
+		saved = false;
+	}
+	
+	public Maze getMaze() {
+		return maze;
 	}
 }

@@ -29,8 +29,7 @@ public class CreateMazeAction implements ActionListener {
 				String widthS = JOptionPane.showInputDialog(null, "Largeur de votre labyrinthe ? (40 Max)", "Largeur", JOptionPane.QUESTION_MESSAGE);
 				width = Integer.parseInt(widthS);
 			}
-			if(mazectrl.checkSaved())
-				mazectrl.newVoidMaze(width, height);
+			mazectrl.newVoidMaze(width, height);
 		}
 		catch (Exception exc) {
 			// Rien à faire, simplement on ne crée pas de nouveau labyrinthe

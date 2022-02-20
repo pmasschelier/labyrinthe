@@ -15,7 +15,7 @@ public class SidePanel extends JPanel {
 		setLayout(new FlowLayout(FlowLayout.LEFT));
 		add(new BoxChoserPanel(mazectrl));
 		
-		add(solveButton = new JButton("Solve"));
+		add(solveButton = new JButton("Solution"));
 		solveButton.addActionListener(new SolveAction(mazectrl));
 	}
 }
