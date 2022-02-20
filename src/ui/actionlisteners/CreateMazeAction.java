@@ -16,22 +16,25 @@ public class CreateMazeAction implements ActionListener {
 		this.mazectrl = mazectrl;
 	}
 
-	public void actionPerformed(ActionEvent e){
-		JOptionPane jop1 = new JOptionPane();
-		
+	public void actionPerformed(ActionEvent e){		
 		int height = 0;
 		int width = 0;
 		
-		while (height <= 0 || height > 40) {
-			String heightS = JOptionPane.showInputDialog(null, "Hauteur de votre labyrinthe ? (40 Max)", "Hauteur", JOptionPane.QUESTION_MESSAGE);
-			height = Integer.parseInt(heightS);
+		try {
+			while (height <= 0 || height > 40) {
+				String heightS = JOptionPane.showInputDialog(null, "Hauteur de votre labyrinthe ? (40 Max)", "Hauteur", JOptionPane.QUESTION_MESSAGE);
+				height = Integer.parseInt(heightS);
+			}
+			while (width<=0 || height >40) {
+				String widthS = JOptionPane.showInputDialog(null, "Largeur de votre labyrinthe ? (40 Max)", "Largeur", JOptionPane.QUESTION_MESSAGE);
+				width = Integer.parseInt(widthS);
+			}
+			if(mazectrl.checkSaved())
+				mazectrl.newVoidMaze(width, height);
 		}
-		while (width<=0 || height >40) {
-			String widthS = JOptionPane.showInputDialog(null, "Largeur de votre labyrinthe ? (40 Max)", "Largeur", JOptionPane.QUESTION_MESSAGE);
-			width = Integer.parseInt(widthS);
+		catch (Exception exc) {
+			// Rien à faire, simplement on ne crée pas de nouveau labyrinthe
 		}
-		
-		mazectrl.newVoidMaze(width, height);
 		
 	}
 }

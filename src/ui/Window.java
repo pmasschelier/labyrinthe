@@ -3,8 +3,11 @@ package ui;
 import javax.swing.*;
 
 import controller.MazeController;
+import ui.actionlisteners.SaveAction;
 
 import java.awt.* ;
+import java.awt.event.ActionEvent;
+import java.io.File;
 
 
 public class Window extends JFrame {
@@ -30,6 +33,25 @@ public class Window extends JFrame {
 	
 	public DrawingPanel getDrawingPanel() {
 		return drawingPanel;
+	}
+	
+	public String getFilename(String title) {
+		try{
+			JFileChooser chooser = new JFileChooser();
+			
+			chooser.setCurrentDirectory(new  File("." + File.separator)); // Dossier Courant
+			int reponse = chooser.showDialog(chooser, title); //Affichage et récupération de la réponse de l'utilisateur
+			
+			if  (reponse == JFileChooser.APPROVE_OPTION){ // Si l'utilisateur clique sur OK
+				String  filename = chooser.getSelectedFile().toString();
+				return filename;
+			}
+		}
+		catch(HeadlessException he){
+			he.printStackTrace();
+		}
+		
+		return null;
 	}
 	
 }

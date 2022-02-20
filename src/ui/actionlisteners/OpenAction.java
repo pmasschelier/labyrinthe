@@ -10,33 +10,28 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 import controller.MazeController;
 import maze.Maze;
 import maze.MazeReadingException;
+import ui.Window;
 
 public class OpenAction implements ActionListener {
 	
 	MazeController mazectrl;
+	Window app;
 	
-	public OpenAction(MazeController mazectrl) {
+	public OpenAction(MazeController mazectrl, Window app) {
 		this.mazectrl = mazectrl;
+		this.app = app;
 	}
 
-	public void actionPerformed(ActionEvent e){
-		try {
-			JFileChooser chooser = new JFileChooser();
-			
-			chooser.setCurrentDirectory(new  File("." + File.separator)); // Dossier Courant
-			int reponse = chooser.showDialog(chooser,"Create"); //Affichage et récupération de la réponse de l'utilisateur
-			
-			if  (reponse == JFileChooser.APPROVE_OPTION) { // Si l'utilisateur clique sur OK
-				String  filename= chooser.getSelectedFile().toString(); // Récupération du chemin du fichier
+	public void actionPerformed(ActionEvent e){		
+		String filename = app.getFilename("Ouvrir");
+
+		if(filename != null && mazectrl.checkSaved())
 				mazectrl.openMaze(filename);
-			}
-		}
-		catch(HeadlessException he){
-			he.printStackTrace();
-		}
+			
 	}
 }

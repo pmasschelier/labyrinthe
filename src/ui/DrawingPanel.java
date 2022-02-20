@@ -29,6 +29,8 @@ public class DrawingPanel extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		g.setColor(new Color(170, 170, 170));
+		g.fillRect(0, 0, getWidth(), getHeight());
 		dpmgr.paintAllTiles(g);
 	}
 	

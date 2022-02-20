@@ -31,7 +31,6 @@ public class MainTest {
 		
 		
 		MazeController mazectrl = new MazeController();
-		Window win = new Window(mazectrl);
 	}
 
 	static public void printChars(char[][] tab) {

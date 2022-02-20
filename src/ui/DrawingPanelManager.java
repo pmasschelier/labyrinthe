@@ -31,11 +31,11 @@ public class DrawingPanelManager {
 		this.panel = panel;
 	}
 	
-	public void setMaze(Maze maze) {
-		this.maze = maze;
+	public void setMaze(Maze newmaze) {
+		maze = newmaze;
 	}
 	
-	public void paintAllTiles(Graphics g) {
+	public void paintAllTiles(Graphics g) {		
 		if(maze == null)
 			return;
 		int w = panel.getWidth() / maze.getSizeX();
