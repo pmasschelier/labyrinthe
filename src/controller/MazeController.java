@@ -16,7 +16,6 @@ public class MazeController {
 	DrawingPanel panel;
 	String filename = null;
 	boolean saved = true;
-	boolean displayPath = false;
 	String currentBoxLabel = "W";
 	
 	public MazeController() {
@@ -53,10 +52,11 @@ public class MazeController {
 			this.filename = filename;
 			updateMaze();
 			saved = true;
+			panel.getDPMgr().setPath(null);
 			
 		}
 		catch (MazeReadingException e) {
-			JOptionPane.showMessageDialog(app, "Le fichier n'est pas au format requis !", "Erreur de format", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(app, e.getMessage(), "Erreur de format", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -132,7 +132,8 @@ public class MazeController {
 		}
 		
 		PreviousInterface prev = Dijkstra.dijkstra(maze, maze.getStart());
-		
+		System.out.println(maze.getStart().getX() + ", " + maze.getStart().getY());
+		System.out.println(maze.getEnd().getX() + ", " + maze.getEnd().getY());
 		if(prev.getFather(maze.getEnd()) == null) {
 			JOptionPane.showMessageDialog(app, "Le labyrinthe n'a pas de solution", "Labyrinthe insoluble", JOptionPane.ERROR_MESSAGE);
 			return;
@@ -151,6 +152,7 @@ public class MazeController {
 		panel.getDPMgr().setPath(null);
 		
 		int xi = x * maze.getSizeX() / panel.getWidth(), yi = y * maze.getSizeY() / panel.getHeight();
+		// System.out.println(xi + " " + yi);
 		
 		switch(currentBoxLabel) {
 		case "E":

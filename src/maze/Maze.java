@@ -50,6 +50,7 @@ public final class Maze implements GraphInterface {
 	 */
 	public final void loadFromFile(String filename) throws  MazeReadingException {
 		BufferedReader in = null;
+		vertices = new ArrayList<>();
 		
 		try {
 			in = new BufferedReader(new FileReader(filename));
@@ -68,14 +69,14 @@ public final class Maze implements GraphInterface {
 					sizeX = length;
 				else {
 					if(length != sizeX)
-						throw new MazeReadingException(filename, i, "Incorrect number of columns");
+						throw new MazeReadingException(filename, i, "Nombre de colonnes incorrect");
 				}
 				for(int j = 0; j < sizeX; j++) {
 					MBox box = null;
 					switch (line.charAt(j)) {
 					case 'A' :
 						if(endSet)
-							throw new MazeReadingException(filename, i-1, "Multiple arrivals found");
+							throw new MazeReadingException(filename, i-1, "Plusieurs arrivées trouvées");
 						end = new ABox(j, i);
 						box = end;
 						endSet = true;
@@ -91,14 +92,14 @@ public final class Maze implements GraphInterface {
 						break;
 					case 'D' :
 						if(startSet)
-							throw new MazeReadingException(filename, i-1, "Multiple departures found");
+							throw new MazeReadingException(filename, i-1, "Plusieurs départs trouvés");
 						start = new DBox(j, i);
 						box = start;
 						startSet = true;
 						vertices.add(box);
 						break;
 					default :
-						throw new MazeReadingException(filename, i-1, "Unknow letter box");
+						throw new MazeReadingException(filename, i-1, "Caractère non reconnu");
 					}
 				}
 				i++;
