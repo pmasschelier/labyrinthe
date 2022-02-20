@@ -27,6 +27,8 @@ public class Window extends JFrame {
 		add(drawingPanel = new DrawingPanel(), BorderLayout.CENTER);
 		mazectrl.setDrawingPanel(drawingPanel);
 		
+		add(new SidePanel(mazectrl), BorderLayout.SOUTH);
+		
 		pack();
 		setVisible(true);
 	}

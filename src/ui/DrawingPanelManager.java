@@ -46,4 +46,8 @@ public class DrawingPanelManager {
 			g.fillRect(box.getX() * w, box.getY() * h, w, h);
 		}
 	}
+	
+	public void paintPath(Graphics g) {
+		
+	}
 }

@@ -4,13 +4,8 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JOptionPane;
 
-import maze.EBox;
-import maze.Maze;
-import maze.MazeReadingException;
-import ui.DrawingPanel;
-import ui.DrawingPanelMouseListener;
-import ui.Window;
-import ui.actionlisteners.SaveAction;
+import maze.*;
+import ui.*;
 
 public class MazeController {
 	Maze maze;
@@ -18,6 +13,8 @@ public class MazeController {
 	DrawingPanel panel;
 	String filename = null;
 	boolean saved = true;
+	boolean arrivalPlaced = false, departurePlaced = false;
+	String currentBoxLabel = "W";
 	
 	public MazeController() {
 		app = new Window(this);
@@ -30,6 +27,10 @@ public class MazeController {
 		DrawingPanelMouseListener mouseListener = new DrawingPanelMouseListener(this);
 		panel.addMouseListener(mouseListener);
 		panel.addMouseMotionListener(mouseListener);
+	}
+	
+	public void setCurrentBox(String label) {
+		currentBoxLabel = label;
 	}
 	
 	public void newVoidMaze(int width, int height) {
@@ -112,7 +113,26 @@ public class MazeController {
 	}
 	
 	public void clickAt(int x, int y) {
-		if(maze != null)
-			maze.setBox(new EBox(x / panel.getWidth(), y / panel.getHeight()));
+		if(maze == null)
+			return;
+		
+		int xi = x * maze.getSizeX() / panel.getWidth(), yi = y * maze.getSizeY() / panel.getHeight();
+		
+		switch(currentBoxLabel) {
+		case "E":
+			maze.setBox(new EBox(xi, yi));
+			break;
+		case "A":
+			maze.setBox(new ABox(xi, yi));
+			break;
+		case "D":
+			maze.setBox(new DBox(xi, yi));
+			break;
+		default:
+			maze.setBox(new WBox(xi, yi));
+			break;
+		}
+		
+		panel.notifyForUpdate();
 	}
 }

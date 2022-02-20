@@ -15,7 +15,8 @@ public final class Maze implements GraphInterface {
 
 	int sizeX, sizeY;
 	ArrayList<MBox> vertices;
-	MBox start, end;
+	DBox start;
+	ABox end;
 	
 	
 	public Maze() {
@@ -75,8 +76,8 @@ public final class Maze implements GraphInterface {
 					case 'A' :
 						if(endSet)
 							throw new MazeReadingException(filename, i-1, "Multiple arrivals found");
-						box = new ABox(j, i);
-						end = box;
+						end = new ABox(j, i);
+						box = end;
 						endSet = true;
 						vertices.add(box);
 						break;
@@ -91,8 +92,8 @@ public final class Maze implements GraphInterface {
 					case 'D' :
 						if(startSet)
 							throw new MazeReadingException(filename, i-1, "Multiple departures found");
-						box = new DBox(j, i);
-						start = box;
+						start = new DBox(j, i);
+						box = start;
 						startSet = true;
 						vertices.add(box);
 						break;
@@ -214,9 +215,41 @@ public final class Maze implements GraphInterface {
 	/**
 	 * @param box case à mettre dans le labyrinthe
 	 */
-	public void setBox(MBox box) {
+	private boolean place(MBox box) {
+		if(start != null && box.getX() == start.getX() && box.getY() == start.getY())
+			start = null;
+		if(end != null && box.getX() == end.getX() && box.getY() == end.getY())
+			end = null;
+		if(box.getX() < 0 || box.getX() >= sizeX || box.getY() < 0 || box.getY() >= sizeY)
+			return false;
 		vertices.set(box.getY() * sizeX + box.getX(), box);
+		return true;
 	}
+	
+	public boolean setBox(DBox box) {
+		boolean ret = place(box);
+		if(start != null)
+			ret &= place(new EBox(start.getX(), start.getY()));
+		start = box;
+		return ret;
+	}
+	
+	public boolean setBox(ABox box) {
+		boolean ret = place(box);
+		if(end != null)
+			ret &= place(new EBox(end.getX(), end.getY()));
+		end = box;
+		return ret;
+	}
+	
+	public boolean setBox(EBox box) {
+		return place(box);
+	}
+	
+	public boolean setBox(WBox box) {
+		return place(box);
+	}
+	
 	
 	
 	/**

@@ -10,7 +10,7 @@ import maze.Maze;
 
 public class DrawingPanel extends JPanel {
 	
-	private Dimension size = new Dimension(900, 900);
+	private Dimension size = new Dimension(800, 800);
 	private DrawingPanelManager dpmgr;
 	
 	public DrawingPanel()
@@ -29,8 +29,6 @@ public class DrawingPanel extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(new Color(170, 170, 170));
-		g.fillRect(0, 0, getWidth(), getHeight());
 		dpmgr.paintAllTiles(g);
 	}
 	
