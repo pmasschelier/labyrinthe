@@ -15,10 +15,11 @@ import maze.MBox;
 import maze.Maze;
 import maze.MazeReadingException;
 
-public class DrawingPanelManager {
-	DrawingPanel panel;
-	Maze maze = null;
-	ArrayDeque<VertexInterface> path = null;
+final public class DrawingPanelManager {
+	
+	private final DrawingPanel panel;
+	private Maze maze = null;
+	private ArrayDeque<VertexInterface> path = null;
 	
 	static final HashMap<String, Color> tilesColors;
 	

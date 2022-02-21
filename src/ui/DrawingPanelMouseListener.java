@@ -7,9 +7,9 @@ import controller.MazeController;
 import maze.EBox;
 import maze.Maze;
 
-public class DrawingPanelMouseListener extends MouseAdapter{
+final public class DrawingPanelMouseListener extends MouseAdapter{
 	
-	MazeController mazectrl;
+	final MazeController mazectrl;
 	
 	public DrawingPanelMouseListener(MazeController mazectrl) {
 		this.mazectrl = mazectrl;

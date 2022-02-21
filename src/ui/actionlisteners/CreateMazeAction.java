@@ -8,9 +8,9 @@ import javax.swing.JOptionPane;
 import controller.MazeController;
 import maze.Maze;
 
-public class CreateMazeAction implements ActionListener {
+final public class CreateMazeAction implements ActionListener {
 	
-	MazeController mazectrl;
+	final MazeController mazectrl;
 	
 	public CreateMazeAction(MazeController mazectrl) {
 		this.mazectrl = mazectrl;

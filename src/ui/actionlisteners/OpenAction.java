@@ -17,10 +17,10 @@ import maze.Maze;
 import maze.MazeReadingException;
 import ui.Window;
 
-public class OpenAction implements ActionListener {
+final public class OpenAction implements ActionListener {
 	
-	MazeController mazectrl;
-	Window app;
+	final MazeController mazectrl;
+	final Window app;
 	
 	public OpenAction(MazeController mazectrl, Window app) {
 		this.mazectrl = mazectrl;

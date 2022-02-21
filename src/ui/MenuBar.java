@@ -6,13 +6,13 @@ import java.awt.event.KeyEvent;
 import controller.MazeController;
 import ui.actionlisteners.*;
 
-public class MenuBar extends JMenuBar
+final public class MenuBar extends JMenuBar
 {
-	Window app;
+	private final Window app;
 	
-	JMenu fileMenu, mazeMenu;
-	JMenuItem newItem, openItem, saveItem, saveAsItem, closeItem, quitItem;
-	JMenuItem solveItem, eraseItem;
+	private final JMenu fileMenu, mazeMenu;
+	private final JMenuItem newItem, openItem, saveItem, saveAsItem, closeItem, quitItem;
+	private final JMenuItem solveItem, eraseItem;
 	
 	public MenuBar(Window app, MazeController mazectrl)
 	{

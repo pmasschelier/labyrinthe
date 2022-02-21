@@ -8,10 +8,10 @@ import javax.swing.JOptionPane;
 import controller.MazeController;
 import ui.Window;
 
-public class QuitAction implements ActionListener{
+final public class QuitAction implements ActionListener{
 	
-	MazeController mazectrl;
-	Window app;
+	final MazeController mazectrl;
+	final Window app;
 	
 	public QuitAction(MazeController mazectrl, Window app) {
 		this.mazectrl = mazectrl;

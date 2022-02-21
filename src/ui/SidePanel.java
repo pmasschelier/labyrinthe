@@ -7,9 +7,9 @@ import ui.actionlisteners.SolveAction;
 
 import java.awt.* ;
 
-public class SidePanel extends JPanel {
+final public class SidePanel extends JPanel {
 	
-	JButton solveButton;
+	private final JButton solveButton;
 	
 	public SidePanel(MazeController mazectrl) {
 		setLayout(new FlowLayout(FlowLayout.LEFT));

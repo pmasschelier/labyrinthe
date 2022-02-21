@@ -5,10 +5,10 @@ import java.awt.event.ActionListener;
 
 import controller.MazeController;
 
-public class SolveAction implements ActionListener {
+final public class SolveAction implements ActionListener {
 	
 
-	MazeController mazectrl;
+	final MazeController mazectrl;
 
 	public SolveAction(MazeController mazectrl) {
 		this.mazectrl = mazectrl;

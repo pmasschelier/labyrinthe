@@ -7,10 +7,10 @@ import java.awt.event.ActionListener;
 import controller.MazeController;
 import ui.Window;
 
-public class SaveAction implements ActionListener {
+final public class SaveAction implements ActionListener {
 	
-	MazeController mazectrl;
-	Window app;
+	final MazeController mazectrl;
+	final Window app;
 	
 	public SaveAction(MazeController mazectrl, Window app) {
 		this.mazectrl = mazectrl;

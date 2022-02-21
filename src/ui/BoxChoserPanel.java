@@ -7,11 +7,11 @@ import java.awt.event.ActionListener;
 
 import controller.MazeController;
 
-public class BoxChoserPanel extends JPanel implements ActionListener {
+final public class BoxChoserPanel extends JPanel implements ActionListener {
 	
-	JRadioButton buttonWall, buttonEmpty, buttonDeparture, buttonArrival;
-	ButtonGroup group;
-	MazeController mazectrl;
+	private final JRadioButton buttonWall, buttonEmpty, buttonDeparture, buttonArrival;
+	private final ButtonGroup group;
+	private final MazeController mazectrl;
 	
 	public BoxChoserPanel(MazeController mazectrl) {
 		this.mazectrl = mazectrl;

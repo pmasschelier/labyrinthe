@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import maze.MBox;
 import maze.Maze;
 
-public class DrawingPanel extends JPanel {
+final public class DrawingPanel extends JPanel {
 	
-	private Dimension size = new Dimension(800, 800);
-	private DrawingPanelManager dpmgr;
+	private final Dimension size = new Dimension(800, 800);
+	private final DrawingPanelManager dpmgr;
 	
 	public DrawingPanel()
 	{

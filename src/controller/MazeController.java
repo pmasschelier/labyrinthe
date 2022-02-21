@@ -10,7 +10,7 @@ import dijkstra.*;
 import maze.*;
 import ui.*;
 
-public class MazeController {
+final public class MazeController {
 	Maze maze;
 	Window app;
 	DrawingPanel panel;
@@ -52,7 +52,6 @@ public class MazeController {
 			this.filename = filename;
 			updateMaze();
 			saved = true;
-			panel.getDPMgr().setPath(null);
 			
 		}
 		catch (MazeReadingException e) {
@@ -114,6 +113,7 @@ public class MazeController {
 	
 	public void updateMaze() {
 		panel.getDPMgr().setMaze(maze);
+		panel.getDPMgr().setPath(null);
 		panel.notifyForUpdate();
 	}
 	
@@ -149,10 +149,7 @@ public class MazeController {
 		if(maze == null)
 			return;
 		
-		panel.getDPMgr().setPath(null);
-		
 		int xi = x * maze.getSizeX() / panel.getWidth(), yi = y * maze.getSizeY() / panel.getHeight();
-		// System.out.println(xi + " " + yi);
 		
 		switch(currentBoxLabel) {
 		case "E":

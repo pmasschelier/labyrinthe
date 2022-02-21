@@ -10,10 +10,10 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 
 
-public class Window extends JFrame {
+final public class Window extends JFrame {
 	
-	MenuBar menuBar;
-	DrawingPanel drawingPanel;
+	private final MenuBar menuBar;
+	private final DrawingPanel drawingPanel;
 	
 	public Window(MazeController mazectrl)
 	{
