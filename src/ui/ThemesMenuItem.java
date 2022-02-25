@@ -4,8 +4,10 @@ import javax.swing.* ;
 
 import ui.actionlisteners.ChangeThemeAction;
 
-public class ThemesMenuItem extends JMenu {
+final public class ThemesMenuItem extends JMenu {
 	
+	private static final long serialVersionUID = 5576535944802200870L;
+
 	ThemesMenuItem(Window app) {
 		super("Thème");
 		
