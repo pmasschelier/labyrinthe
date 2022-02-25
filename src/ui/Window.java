@@ -37,12 +37,16 @@ final public class Window extends JFrame {
 		return drawingPanel;
 	}
 	
+	public void showError(String title, String msg) {
+		JOptionPane.showMessageDialog(this, msg, title, JOptionPane.ERROR_MESSAGE);
+	}
+	
 	public String getFilename(String title) {
 		try{
 			JFileChooser chooser = new JFileChooser();
 			
 			chooser.setCurrentDirectory(new  File("." + File.separator)); // Dossier Courant
-			int reponse = chooser.showDialog(chooser, title); //Affichage et récupération de la réponse de l'utilisateur
+			int reponse = chooser.showDialog(this, title); //Affichage et récupération de la réponse de l'utilisateur
 			
 			if  (reponse == JFileChooser.APPROVE_OPTION){ // Si l'utilisateur clique sur OK
 				String  filename = chooser.getSelectedFile().toString();

@@ -15,7 +15,8 @@ final public class EraseAction implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e){
-		mazectrl.newVoidMaze(mazectrl.getMaze().getSizeX(), mazectrl.getMaze().getSizeY());
+		if(mazectrl.getMaze() != null)
+			mazectrl.newVoidMaze(mazectrl.getMaze().getSizeX(), mazectrl.getMaze().getSizeY());
 	}
 	
 }

@@ -10,9 +10,11 @@ final public class MenuBar extends JMenuBar
 {
 	private final Window app;
 	
-	private final JMenu fileMenu, mazeMenu;
+	private final JMenu fileMenu, mazeMenu, showMenu;
 	private final JMenuItem newItem, openItem, saveItem, saveAsItem, closeItem, quitItem;
-	private final JMenuItem solveItem, eraseItem;
+	private final JMenuItem solveItem, randomItem, eraseItem;
+	private final JMenuItem tilesetItem;
+	private final JMenu styleMenu;
 	
 	public MenuBar(Window app, MazeController mazectrl)
 	{
@@ -59,10 +61,25 @@ final public class MenuBar extends JMenuBar
 		solveItem.addActionListener(new SolveAction(mazectrl));
 		mazeMenu.add(solveItem);
 
+		randomItem = new JMenuItem("Aléatoire");
+		randomItem.addActionListener(new CreateRandomMazeAction(mazectrl));
+		mazeMenu.add(randomItem);
+
 		eraseItem = new JMenuItem("Effacer");
 		eraseItem.addActionListener(new EraseAction(mazectrl));
 		mazeMenu.add(eraseItem);
 		
 		add(mazeMenu);
+		
+		showMenu = new JMenu("Affichage");
+		
+		styleMenu = new ThemesMenuItem(app);
+		showMenu.add(styleMenu);
+		
+		tilesetItem = new JMenuItem("Thème");
+		showMenu.add(tilesetItem);
+		add(showMenu);
+		
 	}
+	
 }

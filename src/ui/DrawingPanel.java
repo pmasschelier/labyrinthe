@@ -15,7 +15,7 @@ final public class DrawingPanel extends JPanel {
 	
 	public DrawingPanel()
 	{
-		
+		super();
 		setBackground(new Color(170, 170, 170));
 		setPreferredSize(size);
 		

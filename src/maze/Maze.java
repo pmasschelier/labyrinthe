@@ -48,85 +48,79 @@ public final class Maze implements GraphInterface {
 	 * @param filename Chemin vers le fichier depuis lequel charger le labyrinthe
 	 * @throws MazeReadingException Si toutes les lignes n'ont pas la même taille ou qu'un caractère est inconnu.
 	 */
-	public final void loadFromFile(String filename) throws  MazeReadingException {
+	public final void loadFromFile(String filename) throws FileNotFoundException, IOException, MazeReadingException {
 		BufferedReader in = null;
 		vertices = new ArrayList<>();
 		
-		try {
-			in = new BufferedReader(new FileReader(filename));
-			int i = 0;
-			boolean firstLine = true;
-			boolean startSet = false;
-			boolean endSet = false;
-			
+		in = new BufferedReader(new FileReader(filename));
+		int i = 0;
+		boolean firstLine = true;
+		boolean startSet = false;
+		boolean endSet = false;
+		
 
-			String line;
-			
-			while ((line = in.readLine()) != null)
-			{
-				int length = line.length();
-				if(firstLine)
-					sizeX = length;
-				else {
-					if(length != sizeX)
-						throw new MazeReadingException(filename, i, "Nombre de colonnes incorrect");
+		String line;
+		
+		while ((line = in.readLine()) != null)
+		{
+			int length = line.length();
+			if(firstLine)
+				sizeX = length;
+			else {
+				if(length != sizeX) {
+					in.close();
+					throw new MazeReadingException(filename, i, "Nombre de colonnes incorrect");
 				}
-				for(int j = 0; j < sizeX; j++) {
-					MBox box = null;
-					switch (line.charAt(j)) {
-					case 'A' :
-						if(endSet)
-							throw new MazeReadingException(filename, i-1, "Plusieurs arrivées trouvées");
-						end = new ABox(j, i);
-						box = end;
-						endSet = true;
-						vertices.add(box);
-						break;
-					case 'E' :
-						box = new EBox(j, i);
-						this.vertices.add(box);
-						break;
-					case 'W' :
-						box = new WBox(j, i);
-						vertices.add(box);
-						break;
-					case 'D' :
-						if(startSet)
-							throw new MazeReadingException(filename, i-1, "Plusieurs départs trouvés");
-						start = new DBox(j, i);
-						box = start;
-						startSet = true;
-						vertices.add(box);
-						break;
-					default :
-						throw new MazeReadingException(filename, i-1, "Caractère non reconnu");
+			}
+			for(int j = 0; j < sizeX; j++) {
+				MBox box = null;
+				switch (line.charAt(j)) {
+				case 'A' :
+					if(endSet) {
+						in.close();
+						throw new MazeReadingException(filename, i-1, "Plusieurs arrivées trouvées");
 					}
+					end = new ABox(j, i);
+					box = end;
+					endSet = true;
+					vertices.add(box);
+					break;
+				case 'E' :
+					box = new EBox(j, i);
+					this.vertices.add(box);
+					break;
+				case 'W' :
+					box = new WBox(j, i);
+					vertices.add(box);
+					break;
+				case 'D' :
+					if(startSet) {
+						in.close();
+						throw new MazeReadingException(filename, i-1, "Plusieurs départs trouvés");
+					}
+					start = new DBox(j, i);
+					box = start;
+					startSet = true;
+					vertices.add(box);
+					break;
+				default :
+					in.close();
+					throw new MazeReadingException(filename, i-1, "Caractère non reconnu");
 				}
-				i++;
-				firstLine = false;
 			}
-			sizeY = i;
+			i++;
+			firstLine = false;
 		}
-		catch(FileNotFoundException e) {
-			System.out.println("Error : " + e);
-		}
-		catch (IOException e) {
-			System.out.println("Error : " + e);
-		}
-		finally {
-			try {
-				in.close();
-			}
-			catch (IOException e) {
-				System.out.println("Error : " + e);
-			}
-		}
+		sizeY = i;
+		
+
+		in.close();
 	}
 	
 	/** @brief Enregistre le labyrinthe dans un fichier
 	 * @param filename Nom du fichier dans lequel sauvegarder
 	 */
-	public void saveToTextFile(String filename) {
+	public void saveToTextFile(String filename) throws FileNotFoundException {
 		PrintWriter writer = null;
 		
 		try {

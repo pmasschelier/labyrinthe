@@ -1,19 +1,14 @@
 package ui;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.stream.Collectors;
 
 import dijkstra.VertexInterface;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Dimension;
 
-import maze.MBox;
 import maze.Maze;
-import maze.MazeReadingException;
 
 final public class DrawingPanelManager {
 	
@@ -62,7 +57,12 @@ final public class DrawingPanelManager {
 			int h = panel.getHeight() / maze.getSizeY();
 		
 			g.setColor(Color.RED);
+			boolean first = true;
 			for(VertexInterface coord : path) {
+				if(first) {
+					first = false;
+					continue;
+				}
 				g.fillRect(coord.getX() * w, coord.getY() * h, w, h);
 			}
 		}

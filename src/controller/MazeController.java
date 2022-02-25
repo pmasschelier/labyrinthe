@@ -1,6 +1,8 @@
 package controller;
 
 import java.awt.event.ActionEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
@@ -11,12 +13,12 @@ import maze.*;
 import ui.*;
 
 final public class MazeController {
-	Maze maze;
-	Window app;
-	DrawingPanel panel;
-	String filename = null;
-	boolean saved = true;
-	String currentBoxLabel = "W";
+	private Maze maze;
+	private Window app;
+	private DrawingPanel panel;
+	private String filename = null;
+	private boolean saved = true;
+	private String currentBoxLabel = "W";
 	
 	public MazeController() {
 		app = new Window(this);
@@ -35,13 +37,60 @@ final public class MazeController {
 		currentBoxLabel = label;
 	}
 	
-	public void newVoidMaze(int width, int height) {
-		if(checkSaved()) {
-			maze = new Maze(width, height);
-			updateMaze();
-			saved = false;
-			filename = null;
+	public boolean newVoidMaze() {
+		int height = 0;
+		int width = 0;
+		
+		try {
+			while (height <= 0 || height > 40) {
+				String heightS = JOptionPane.showInputDialog(app, "Hauteur de votre labyrinthe ? (40 Max)", "Hauteur", JOptionPane.QUESTION_MESSAGE);
+				height = Integer.parseInt(heightS);
+			}
+			while (width<=0 || height >40) {
+				String widthS = JOptionPane.showInputDialog(app, "Largeur de votre labyrinthe ? (40 Max)", "Largeur", JOptionPane.QUESTION_MESSAGE);
+				width = Integer.parseInt(widthS);
+			}
+			return newVoidMaze(width, height);
 		}
+		catch (Exception exc) {
+			// Rien à faire, simplement on ne crée pas de nouveau labyrinthe
+			return false;
+		}
+	}
+	
+	public boolean newVoidMaze(int width, int height) {
+		if(!checkSaved())
+			return false;
+		
+		maze = new Maze(width, height);
+		updateMaze();
+		saved = false;
+		filename = null;
+		
+		return true;
+	}
+	
+	public boolean newRandomMaze() {
+		if(maze == null) {
+			if(!newVoidMaze())
+				return false;
+		}
+		else {
+			if(!newVoidMaze(maze.getSizeX(), maze.getSizeY()))
+				return false;
+		}
+		
+		for(int i = 0; i < maze.getSizeX(); i++) {
+			for(int j = 0; j < maze.getSizeY(); j++) {
+				if(Math.random() > 0.5)
+					maze.setBox(new WBox(i, j));
+			}
+		}
+		saved = false;
+		filename = null;
+		updateMaze();
+		
+		return true;
 	}
 	
 	public void openMaze(String filename) {
@@ -54,16 +103,27 @@ final public class MazeController {
 			saved = true;
 			
 		}
-		catch (MazeReadingException e) {
-			JOptionPane.showMessageDialog(app, e.getMessage(), "Erreur de format", JOptionPane.ERROR_MESSAGE);
+		catch(FileNotFoundException e) {
+			app.showError("Fichier non trouvé", e.getMessage());
+		}
+		catch(IOException e) {
+			app.showError("Erreur de lecture", e.getMessage());
+		}
+		catch(MazeReadingException e) {
+			app.showError("Erreur de format", e.getMessage());
 		}
 	}
 	
 	public void saveMaze() {
 		if(maze != null) {
 			if(hasFilename()) {
-				maze.saveToTextFile(filename);
-				saved = true;
+				try {
+					maze.saveToTextFile(filename);
+					saved = true;
+				}
+				catch(FileNotFoundException e) {
+					app.showError("Erreur lors de l'écriture du fichier", e.getMessage());
+				}
 			}
 			else
 				filename = saveAsMaze();
@@ -77,8 +137,13 @@ final public class MazeController {
 			filename = app.getFilename("Enregistrer Sous");
 			
 			if(filename != null) {
-				maze.saveToTextFile(filename);
-				saved = true;
+				try {
+					maze.saveToTextFile(filename);
+					saved = true;
+				}
+				catch(FileNotFoundException e) {
+					app.showError("Erreur lors de l'écriture du fichier", e.getMessage());
+				}
 			}
 		}
 		
@@ -149,7 +214,8 @@ final public class MazeController {
 		if(maze == null)
 			return;
 		
-		int xi = x * maze.getSizeX() / panel.getWidth(), yi = y * maze.getSizeY() / panel.getHeight();
+		int xi = x * maze.getSizeX() / panel.getWidth();
+		int yi = y * maze.getSizeY() / panel.getHeight();
 		
 		switch(currentBoxLabel) {
 		case "E":
@@ -165,7 +231,8 @@ final public class MazeController {
 			maze.setBox(new WBox(xi, yi));
 			break;
 		}
-		
+
+		panel.getDPMgr().setPath(null);
 		panel.notifyForUpdate();
 		saved = false;
 	}

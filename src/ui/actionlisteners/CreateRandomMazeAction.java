@@ -5,15 +5,15 @@ import java.awt.event.ActionListener;
 
 import controller.MazeController;
 
-final public class CreateMazeAction implements ActionListener {
+final public class CreateRandomMazeAction implements ActionListener {
 	
 	final MazeController mazectrl;
 	
-	public CreateMazeAction(MazeController mazectrl) {
+	public CreateRandomMazeAction(MazeController mazectrl) {
 		this.mazectrl = mazectrl;
 	}
 
 	public void actionPerformed(ActionEvent e){
-		mazectrl.newVoidMaze();		
+		mazectrl.newRandomMaze();
 	}
 }
