@@ -75,7 +75,7 @@ final public class MenuBar extends JMenuBar
 		styleMenu = new ThemesMenuItem(app);
 		showMenu.add(styleMenu);
 		
-		tilesetItem = new JMenuItem("Thème");
+		tilesetItem = new JMenuItem("Tileset");
 		showMenu.add(tilesetItem);
 		add(showMenu);
 		
