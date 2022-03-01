@@ -1,5 +1,12 @@
 package dijkstra;
 
+/**
+ * <b>Interface de la table de hashage utilisé pour stocker les distances
+ * des sommets dans l'algorithme de Dijkstra</b>
+ * 
+ * @author masschelier@telecom-paris.fr
+ *
+ */
 public interface PiInterface {
 	
 	/**

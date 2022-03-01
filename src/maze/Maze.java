@@ -11,6 +11,17 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * <b>Classe représentant le labyrinthe en tant que structure de donnée</b>
+ * <p>Le labyrinthe est essentiellement constituée d'un ArrayList de MBox
+ * arrangée d'abord par ligne puis par colonne. Le labyrinthe se charge de 
+ * conserver sa propre cohérence notamment en mettant à jour ses attribut start
+ * et end qui doivent référencer respectivement l'unique DBox et l'unique ABox
+ * de vertices.</p>
+ * 
+ * @author masschelier@telecom-paris.fr
+ *
+ */
 public final class Maze implements GraphInterface {
 
 	int sizeX, sizeY;
@@ -19,16 +30,31 @@ public final class Maze implements GraphInterface {
 	ABox end;
 	
 	
+	/**
+	 * Constructeur par défaut de Maze
+	 * Le labyrinthe créé est de taille nulle
+	 */
 	public Maze() {
 		vertices = new ArrayList<>();
 		sizeX = 0;
 		sizeY = 0;
 	}
 	
+	/**
+	 * Crée un labyrinthe vide de la taille spécifiée
+	 * @param width Largeur du labyrinthe
+	 * @param height Hauteur du labyrinthe
+	 * @see Maze#createEmpty(int, int)
+	 */
 	public Maze(int width, int height) {
 		createEmpty(width, height);
 	}
 	
+	/**
+	 * Crée un labyrinthe vide de la taille spécifiée
+	 * @param width Largeur du labyrinthe
+	 * @param height Hauteur du labyrinthe
+	 */
 	public void createEmpty(int width, int height) {
 		this.vertices = new ArrayList<>(width * height);
 		this.sizeX = width;
@@ -43,7 +69,7 @@ public final class Maze implements GraphInterface {
 	
 	
 	/**
-	 * @brief Charge le labyrinthe depuis un fichier texte
+	 * Charge le labyrinthe depuis un fichier texte.
 	 * Lit le fichier ligne par ligne puis les lignes caractère par caractère pour initialiser les propriétés
 	 * @param filename Chemin vers le fichier depuis lequel charger le labyrinthe
 	 * @throws MazeReadingException Si toutes les lignes n'ont pas la même taille ou qu'un caractère est inconnu.
@@ -73,7 +99,6 @@ public final class Maze implements GraphInterface {
 				}
 			}
 			for(int j = 0; j < sizeX; j++) {
-				MBox box = null;
 				switch (line.charAt(j)) {
 				case 'A' :
 					if(endSet) {
@@ -81,17 +106,14 @@ public final class Maze implements GraphInterface {
 						throw new MazeReadingException(filename, i-1, "Plusieurs arrivées trouvées");
 					}
 					end = new ABox(j, i);
-					box = end;
 					endSet = true;
-					vertices.add(box);
+					vertices.add(end);
 					break;
 				case 'E' :
-					box = new EBox(j, i);
-					this.vertices.add(box);
+					this.vertices.add(new EBox(j, i));
 					break;
 				case 'W' :
-					box = new WBox(j, i);
-					vertices.add(box);
+					vertices.add(new WBox(j, i));
 					break;
 				case 'D' :
 					if(startSet) {
@@ -99,9 +121,8 @@ public final class Maze implements GraphInterface {
 						throw new MazeReadingException(filename, i-1, "Plusieurs départs trouvés");
 					}
 					start = new DBox(j, i);
-					box = start;
 					startSet = true;
-					vertices.add(box);
+					vertices.add(start);
 					break;
 				default :
 					in.close();
@@ -117,7 +138,7 @@ public final class Maze implements GraphInterface {
 		in.close();
 	}
 	
-	/** @brief Enregistre le labyrinthe dans un fichier
+	/** Enregistre le labyrinthe dans un fichier
 	 * @param filename Nom du fichier dans lequel sauvegarder
 	 */
 	public void saveToTextFile(String filename) throws FileNotFoundException {
@@ -145,7 +166,7 @@ public final class Maze implements GraphInterface {
 	}
 	
 	
-	/** @brief Renvoie la liste des voisin de v
+	/** Renvoie la liste des voisin de v
 	 * Test si les voisins directs ne sont pas des murs, auquel cas on les ajoute à la liste
 	 * @param v VertexInterface dont on cherche les voisins dans le graphe
 	 * @return Liste des voisins
@@ -176,22 +197,22 @@ public final class Maze implements GraphInterface {
 	}
 	
 	
-	/** @brief Renvoie le poids de l'arête entre deux VertexInterface voisins dans le graphe
-	 *	La fonction renvoie toujours 1 car les voisins sont tous à une distance de 1 dans un labyrinthe
+	/** Renvoie le poids de l'arête entre deux VertexInterface voisins dans le graphe.
+	 *	La fonction renvoie toujours 1 car les voisins sont tous à une distance de 1 dans un labyrinthe.
 	 *	@return 1
 	 */
 	public int getWeight(VertexInterface a,VertexInterface b) {
 		return 1;
 	}
 	
-	/** @brief Renvoie le tableau des sommets du graphe
+	/** Renvoie le tableau des sommets du graphe.
 	 * @return Liste des vertex ordonnées par lignes puis par colonnes
 	 */
 	public ArrayList<VertexInterface> getVertices() {
 		return new ArrayList<VertexInterface>(vertices);
 	}
 	
-	/** @brief Renvoie le tableau des cases du labyrinthe
+	/** Renvoie le tableau des cases du labyrinthe.
 	 * @return Liste des boites ordonnées par lignes puis par colonnes
 	 */
 	public ArrayList<MBox> getBoxes() {
@@ -199,6 +220,7 @@ public final class Maze implements GraphInterface {
 	}
 	
 	/**
+	 * Renvoie la boite située aux coordonées spécifiée.
 	 * @param x numéro de la colonne
 	 * @param y numéro de la ligne
 	 * @return Boite situé à ces coordonnées
@@ -207,9 +229,6 @@ public final class Maze implements GraphInterface {
 		return vertices.get(y * sizeX + x);
 	}
 	
-	/**
-	 * @param box case à mettre dans le labyrinthe
-	 */
 	private boolean place(MBox box) {
 		if(start != null && box.getX() == start.getX() && box.getY() == start.getY())
 			start = null;
@@ -220,7 +239,18 @@ public final class Maze implements GraphInterface {
 		vertices.set(box.getY() * sizeX + box.getX(), box);
 		return true;
 	}
-	
+
+	/**
+	 * Place une DBox dans le labyrinthe, les coordonnées auxquelles elle doit
+	 * être placée est embarquée dans box.
+	 * La case qui prenait sa place précédemment est écrasée.
+	 * L'ancien départ s'il existait est remplacée par une EBox
+	 * @param box case à mettre dans le labyrinthe
+	 * @return true ssi la boite a pu être placée
+	 * @see Maze#setBox(ABox)
+	 * @see Maze#setBox(EBox)
+	 * @see Maze#setBox(WBox)
+	 */
 	public boolean setBox(DBox box) {
 		boolean ret = place(box);
 		if(start != null)
@@ -228,7 +258,18 @@ public final class Maze implements GraphInterface {
 		start = box;
 		return ret;
 	}
-	
+
+	/**
+	 * Place une ABox dans le labyrinthe, les coordonnées auxquelles elle doit
+	 * être placée est embarquée dans box.
+	 * La case qui prenait sa place précédemment est écrasée.
+	 * L'ancienne arrivée si elle existait est remplacée par une EBox
+	 * @param box case à mettre dans le labyrinthe
+	 * @return true ssi la boite a pu être placée
+	 * @see Maze#setBox(DBox)
+	 * @see Maze#setBox(EBox)
+	 * @see Maze#setBox(WBox)
+	 */
 	public boolean setBox(ABox box) {
 		boolean ret = place(box);
 		if(end != null)
@@ -236,18 +277,37 @@ public final class Maze implements GraphInterface {
 		end = box;
 		return ret;
 	}
-	
+
+	/**
+	 * Place une EBox dans le labyrinthe, les coordonnées auxquelles elle doit
+	 * être placée est embarquée dans box
+	 * La case qui prenait sa place précédemment est écrasée.
+	 * @param box case à mettre dans le labyrinthe
+	 * @return true ssi la boite a pu être placée
+	 * @see Maze#setBox(ABox)
+	 * @see Maze#setBox(DBox)
+	 * @see Maze#setBox(WBox)
+	 */
 	public boolean setBox(EBox box) {
 		return place(box);
 	}
-	
+
+	/**
+	 * Place une WBoc dans le labyrinthe, les coordonnées auxquelles elle doit
+	 * être placée est embarquée dans box.
+	 * La case qui prenait sa place précédemment est écrasée.
+	 * @param box case à mettre dans le labyrinthe
+	 * @return true ssi la boite a pu être placée
+	 * @see Maze#setBox(ABox)
+	 * @see Maze#setBox(DBox)
+	 * @see Maze#setBox(EBox)
+	 */
 	public boolean setBox(WBox box) {
 		return place(box);
 	}
 	
-	
-	
 	/**
+	 * Getter pour la largeur du labyrinthe.
 	 * @return Largeur du labyrinthe
 	 */
 	public int getSizeX() {
@@ -255,6 +315,7 @@ public final class Maze implements GraphInterface {
 	}
 	
 	/**
+	 * Getter pour la hauteur du labyrinthe.
 	 * @return Hauteur du labyrinthe
 	 */
 	public int getSizeY() {
@@ -262,12 +323,14 @@ public final class Maze implements GraphInterface {
 	}
 
 	/**
+	 * Getter pour le départ du labyrinthe.
 	 * @return Départ du labyrinthe
 	 */
 	public VertexInterface getStart() {
 		return start;
 	}
 	/**
+	 * Getter pour l'arrivée du labyrinthe.
 	 * @return Arrivée du labyrinthe
 	 */
 	public VertexInterface getEnd() {
@@ -275,6 +338,7 @@ public final class Maze implements GraphInterface {
 	}
 	
 	/**
+	 * Renvoie un tableau de char représentant le labyrinthe afin de l'afficher.
 	 * @return Tableau de char à 2 dimensions représentant le labyrinthe
 	 */
 	public char[][] toChars() {

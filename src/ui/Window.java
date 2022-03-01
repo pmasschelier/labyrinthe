@@ -2,7 +2,7 @@ package ui;
 
 import javax.swing.*;
 
-import controller.MazeController;
+import main.MazeController;
 
 import java.awt.* ;
 import java.awt.event.WindowEvent;
@@ -11,6 +11,21 @@ import java.io.File;
 import java.util.HashMap;
 
 
+/**
+ * <b>Classe représentant la fenêtre principale</b>
+ * <p>La fenêtre est une JFrame qui implémente son propre WindowListener.</p>
+ * <p>La classe fournit une HashMap statique fournissant les icones pour les éléments de la fenêtre.</p>
+ * <p>La fenêtre contient une MenuBar, une ToolBar, un DrawingPanel et un SidePanel</p>
+ * 
+ * @see MenuBar
+ * @see ToolBar
+ * @see DrawingPanel
+ * @see SidePanel
+ * @see MazeController
+ * 
+ * @author masschelier@telecom-paris.fr
+ *
+ */
 final public class Window extends JFrame implements WindowListener {
 	
 	private static final long serialVersionUID = -4219666736288466382L;
@@ -37,15 +52,13 @@ final public class Window extends JFrame implements WindowListener {
 		
 		this.mazectrl = mazectrl;
 		
+		setJMenuBar(new MenuBar(mazectrl));
+		//setLayout(new BorderLayout()); // BorderLayout est déjà le layout par défaut d'une fenêtre swing
 		
-		setJMenuBar(new MenuBar(this, mazectrl)) ;
-		//setLayout(new BorderLayout());
+		add(new ToolBar(mazectrl), BorderLayout.NORTH);
 		
-		add(new ToolBar(mazectrl, this), BorderLayout.NORTH);
-		
-		add(drawingPanel = new DrawingPanel(), BorderLayout.CENTER);
-		mazectrl.setDrawingPanel(drawingPanel);
-		
+		add(drawingPanel = new DrawingPanel(mazectrl), BorderLayout.CENTER);
+
 		add(new SidePanel(mazectrl), BorderLayout.SOUTH);
 
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -59,10 +72,20 @@ final public class Window extends JFrame implements WindowListener {
 		return drawingPanel;
 	}
 	
+	/**
+	 * Affiche un fenêtre d'erreur
+	 * @param title Titre de la fenêtre d'erreur
+	 * @param msg Message à afficher
+	 */
 	public void showError(String title, String msg) {
 		JOptionPane.showMessageDialog(this, msg, title, JOptionPane.ERROR_MESSAGE);
 	}
 	
+	/**
+	 * Affiche une fenêtre permettant de choisir un fichier sur le disque
+	 * @param title Titre de la fenêtre
+	 * @return Chemin absolu du fichier séléctionné ou null si aucun fichier n'a été séléctionné
+	 */
 	public String getFilename(String title) {
 		try{
 			JFileChooser chooser = new JFileChooser();
@@ -88,6 +111,9 @@ final public class Window extends JFrame implements WindowListener {
 		
 	}
 
+	/**
+	 * Vérifie que le labyrinthe a été enregistré avant de fermer l'application.
+	 */
 	@Override
 	public void windowClosing(WindowEvent e) {
 		if (mazectrl.checkSaved())

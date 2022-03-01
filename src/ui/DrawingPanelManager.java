@@ -10,6 +10,15 @@ import java.awt.Graphics;
 
 import maze.Maze;
 
+/**
+ * <b>DrawingPanelManager est la classe chargée de dessiner sur le DrawingPanel</b>
+ * <p>La classe contient les méthodes pour dessiner le labyrinthe ainsi que le chemin
+ * sur le drawing panel</p>
+ * <p>La classe définit une hashmap statique pour définir la couleur de chaque case.</p>
+ * 
+ * @author masschelier@telecom-paris.fr
+ *
+ */
 final public class DrawingPanelManager {
 	
 	private final DrawingPanel panel;
@@ -31,14 +40,26 @@ final public class DrawingPanelManager {
 		this.panel = panel;
 	}
 	
+	/**
+	 * @param maze Nouveau labyrinthe à dessiner
+	 */
 	public void setMaze(Maze maze) {
 		this.maze = maze;
 	}
 	
+	/**
+	 * @param path Nouveau chemin à dessiner (en rouge)
+	 * On passe path = null pour ne plus dessiner de chemin
+	 */
 	public void setPath(ArrayDeque<VertexInterface> path) {
 		this.path = path;
 	}
 	
+	/**
+	 * Dessine le labyrinthe sur le DrawingPanel à partir des couleur définies
+	 * dans tilesColors
+	 * @param g instance de Graphics passée par l'instance de DrawingPanel
+	 */
 	public void paintAllTiles(Graphics g) {		
 		if(maze == null)
 			return;
@@ -51,6 +72,10 @@ final public class DrawingPanelManager {
 		}
 	}
 	
+	/**
+	 * Dessine le chemin en rouge sur le DrawingPanel
+	 * @param g instance de Graphics passée par l'instance de DrawingPanel
+	 */
 	public void paintPath(Graphics g) {
 		if(path != null && maze != null) {
 			int w = panel.getWidth() / maze.getSizeX();

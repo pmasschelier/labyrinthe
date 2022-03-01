@@ -3,19 +3,19 @@ package ui.actionlisteners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JOptionPane;
+import main.MazeController;
 
-import controller.MazeController;
-import ui.Window;
-
+/**
+ * <b>Classe implémantant l'ActionListener qui répond à l'action "Fermer le labyrinthe"</b>
+ * 
+ * @author masschelier@telecom-paris.fr
+ */
 final public class CloseAction implements ActionListener {
 	
 	final MazeController mazectrl;
-	final Window app;
-	
-	public CloseAction(MazeController mazectrl, Window app) {
+
+	public CloseAction(MazeController mazectrl) {
 		this.mazectrl = mazectrl;
-		this.app = app;
 	}
 
 	public void actionPerformed(ActionEvent e){

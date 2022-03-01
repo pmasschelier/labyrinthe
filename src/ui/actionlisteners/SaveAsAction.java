@@ -1,21 +1,22 @@
 package ui.actionlisteners;
 
-import java.awt.HeadlessException;
+/**
+ * <b>Classe implémantant l'ActionListener qui répond à l'action "Enregistrer sous"</b>
+ * 
+ * @author masschelier@telecom-paris.fr
+ */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import controller.MazeController;
-import ui.Window;
+import main.MazeController;
 
 final public class SaveAsAction implements ActionListener {
 	
 
 	final MazeController mazectrl;
-	final Window app;
 	
-	public SaveAsAction(MazeController mazectrl, Window app) {
+	public SaveAsAction(MazeController mazectrl) {
 		this.mazectrl = mazectrl;
-		this.app = app;
 	}
 
 	public void actionPerformed(ActionEvent e){

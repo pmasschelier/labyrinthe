@@ -1,9 +1,14 @@
 package ui.actionlisteners;
 
+/**
+ * <b>Classe implémantant l'ActionListener qui répond à l'action "résoudre le labyrinthe"</b>
+ * 
+ * @author masschelier@telecom-paris.fr
+ */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import controller.MazeController;
+import main.MazeController;
 
 final public class SolveAction implements ActionListener {
 	

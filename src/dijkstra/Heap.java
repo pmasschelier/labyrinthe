@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Classe implementant HeapInterface
+ * <b>Classe implementant HeapInterface</b>
  * La classe représente un tas (dans l'ordre décroissant) contenant des VertexInterface
+ * 
+ * @author masschelier@telecom-paris.fr
  */
 public final class Heap implements HeapInterface {
 	private ArrayList<VertexInterface> heap;

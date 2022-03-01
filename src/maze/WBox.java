@@ -1,8 +1,11 @@
 package maze;
 
+
 /**
- * Class fille de MBox
- * Représente un mur du labyrinthe
+ * <b>Représente un mur du labyrinthe</b>
+ * Classe fille de MBox
+ * 
+ * @author masschelier@telecom-paris.fr
  */
 public final class WBox extends MBox {
 	public WBox(int x, int y) {

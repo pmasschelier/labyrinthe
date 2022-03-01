@@ -4,9 +4,12 @@ import java.util.ArrayDeque;
 import java.util.HashMap;
 
 /**
- * Classe basée sur une HashMap servant à stocker la précédance pour chaque sommet
- * résultant de l'algorithme de Dijkstra
+ * <b>Classe basée sur une HashMap servant à stocker la précédance pour chaque sommet
+ * résultant de l'algorithme de Dijkstra</b>
+ * 
+ * @author masschelier@telecom-paris.fr
  */
+
 public final class Previous implements PreviousInterface {
 	private HashMap<VertexInterface, VertexInterface> prev;
 	

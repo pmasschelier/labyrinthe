@@ -1,8 +1,13 @@
 package dijkstra;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 
+/**
+ * <b>Interface de la classe servant à stocker la précédance pour chaque sommet
+ * résultant de l'algorithme de Dijkstra</b>
+ * 
+ * @author masschelier@telecom-paris.fr
+ */
 public interface PreviousInterface {
 	
 	/**

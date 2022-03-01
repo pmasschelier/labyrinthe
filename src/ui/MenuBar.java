@@ -1,11 +1,30 @@
 package ui;
 
 import javax.swing.* ;
+
+import main.MazeController;
+
 import java.awt.event.KeyEvent;
 
-import controller.MazeController;
 import ui.actionlisteners.*;
 
+/**
+ * <b>Classe représentant la barre de menu de la fenêtre</b>
+ * <p>La barre de menu contient trois menu :
+ * <ul>
+ * <li>Fichier : Nouveau, Ouvrir, Enregistrer, Enregistrer Sous, Fermer, Quitter</li>
+ * <li>Labyrinthe : Résoudre, Aléatoire, Effacer</li>
+ * <li>Affichage : Thème, Tileset</li>
+ * </ul>
+ * </p>
+ * <p>Les ActionListener sont les mêmes pour les boutons de ToolBar</p>
+ * 
+ * @see ToolBar
+ * @see MazeController
+ * 
+ * @author masschelier@telecom-paris.fr
+ *
+ */
 final public class MenuBar extends JMenuBar
 {
 	private static final long serialVersionUID = 2101817289107094333L;
@@ -16,7 +35,11 @@ final public class MenuBar extends JMenuBar
 	private final JMenuItem tilesetItem;
 	private final JMenu styleMenu;
 	
-	public MenuBar(Window app, MazeController mazectrl)
+	/**
+	 * Constructeur de MenuBar, crée les menu et les items de menu
+	 * @param mazectrl instance de MazeController qui sera appelée en réaction aux clics.
+	 */
+	public MenuBar(MazeController mazectrl)
 	{
 		super() ;
 
@@ -29,26 +52,26 @@ final public class MenuBar extends JMenuBar
 		
 		openItem = new JMenuItem("Ouvrir", Window.icons.get("open"));
 		openItem.setMnemonic(KeyEvent.VK_O);
-		openItem.addActionListener(new OpenAction(mazectrl, app));
+		openItem.addActionListener(new OpenAction(mazectrl));
 		fileMenu.add(openItem);
 		
 		saveItem = new JMenuItem("Enregistrer", Window.icons.get("save"));
 		saveItem.setMnemonic(KeyEvent.VK_S);
-		saveItem.addActionListener(new SaveAction(mazectrl, app));
+		saveItem.addActionListener(new SaveAction(mazectrl));
 		fileMenu.add(saveItem);
 		
 		saveAsItem = new JMenuItem("Enregistrer sous");
-		saveAsItem.addActionListener(new SaveAsAction(mazectrl, app));
+		saveAsItem.addActionListener(new SaveAsAction(mazectrl));
 		fileMenu.add(saveAsItem);
 		
 		closeItem = new JMenuItem("Fermer", Window.icons.get("close"));
 		closeItem.setMnemonic(KeyEvent.VK_C);
-		closeItem.addActionListener(new CloseAction(mazectrl, app));
+		closeItem.addActionListener(new CloseAction(mazectrl));
 		fileMenu.add(closeItem);
 		
 		quitItem = new JMenuItem("Quitter");
 		quitItem.setMnemonic(KeyEvent.VK_Q);
-		quitItem.addActionListener(new QuitAction(mazectrl, app));
+		quitItem.addActionListener(new QuitAction(mazectrl));
 		fileMenu.add(quitItem);
 		
 		add(fileMenu);
@@ -72,7 +95,7 @@ final public class MenuBar extends JMenuBar
 		
 		showMenu = new JMenu("Affichage");
 		
-		styleMenu = new ThemesMenuItem(app);
+		styleMenu = new ThemesMenuItem(mazectrl.getWindow());
 		showMenu.add(styleMenu);
 		
 		tilesetItem = new JMenuItem("Tileset");

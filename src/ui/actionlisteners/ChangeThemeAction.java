@@ -9,8 +9,11 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import ui.Window;
 
-import javax.swing.UIManager;
-
+/**
+ * <b>Classe implémantant l'ActionListener qui répond à l'action "changer de thème"</b>
+ * 
+ * @author masschelier@telecom-paris.fr
+ */
 public class ChangeThemeAction implements ActionListener {
 	UIManager.LookAndFeelInfo info;
 	Window app;

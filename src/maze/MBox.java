@@ -3,8 +3,10 @@ package maze;
 import dijkstra.VertexInterface;
 
 /**
- * Class abstraite implémentant VertexInterface
+ * <b>Classe abstraite implémentant VertexInterface</b>
  * Représente une case du labyrinthe
+ * 
+ * @author masschelier@telecom-paris.fr
  */
 public abstract class MBox implements VertexInterface {
 	
@@ -27,6 +29,10 @@ public abstract class MBox implements VertexInterface {
 		return label;
 	}
 	
+	/**
+	 * Renvoie vrai si la case est traversable
+	 * @return accessible
+	 */
 	public final boolean isAccessible() {
 		return accessible;
 	}

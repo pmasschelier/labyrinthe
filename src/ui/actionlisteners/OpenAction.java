@@ -1,34 +1,25 @@
 package ui.actionlisteners;
 
-import java.awt.HeadlessException;
+/**
+ * <b>Classe implémantant l'ActionListener qui répond à l'action "Ouvrir"</b>
+ * 
+ * @author masschelier@telecom-paris.fr
+ */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-
-import controller.MazeController;
-import maze.Maze;
-import maze.MazeReadingException;
-import ui.Window;
+import main.MazeController;
 
 final public class OpenAction implements ActionListener {
 	
 	final MazeController mazectrl;
-	final Window app;
 	
-	public OpenAction(MazeController mazectrl, Window app) {
+	public OpenAction(MazeController mazectrl) {
 		this.mazectrl = mazectrl;
-		this.app = app;
 	}
 
 	public void actionPerformed(ActionEvent e){		
-		String filename = app.getFilename("Ouvrir");
+		String filename = mazectrl.getWindow().getFilename("Ouvrir");
 
 		if(filename != null && mazectrl.checkSaved())
 				mazectrl.openMaze(filename);

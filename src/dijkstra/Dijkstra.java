@@ -3,9 +3,15 @@ package dijkstra;
 import java.util.ArrayList;
 
 
+/**
+ * <b>Classe implémantant l'algorithme de Dijkstra.</b>
+ * 
+ * @author masschelier@telecom-paris.fr
+ *
+ */
 public final class Dijkstra {
 	
-	/** @brief Méthode statique implémentant l'algorithme de Dijkstra
+	/** Méthode statique implémentant l'algorithme de Dijkstra
 	 * @param g Graphe sur lequel on veut executer l'algorithme
 	 * @param r Racine du graphe
 	 * @return HashMap de précédance pour chaque sommet du graphe

@@ -1,8 +1,10 @@
 package maze;
 
 /**
- * Class fille de MBox
- * Représente une case de départ du labyrinthe
+ * <b>Représente une case de départ du labyrinthe</b>
+ * Classe fille de MBox
+ * 
+ * @author masschelier@telecom-paris.fr
  */
 public final class DBox extends MBox {
 	public DBox(int x, int y) {

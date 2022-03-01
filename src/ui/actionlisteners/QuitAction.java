@@ -1,19 +1,21 @@
 package ui.actionlisteners;
 
+/**
+ * <b>Classe implémantant l'ActionListener qui répond à l'action "Quitter"</b>
+ * 
+ * @author masschelier@telecom-paris.fr
+ */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import controller.MazeController;
-import ui.Window;
+import main.MazeController;
 
 final public class QuitAction implements ActionListener{
 	
 	final MazeController mazectrl;
-	final Window app;
 	
-	public QuitAction(MazeController mazectrl, Window app) {
+	public QuitAction(MazeController mazectrl) {
 		this.mazectrl = mazectrl;
-		this.app = app;
 	}
 	
 	public void actionPerformed(ActionEvent e){

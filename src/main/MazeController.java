@@ -1,4 +1,4 @@
-package controller;
+package main;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,6 +10,20 @@ import dijkstra.*;
 import maze.*;
 import ui.*;
 
+/**
+ * <b>Classe représentant le controleur de l'application. C'est elle qui doit être instanciée pour
+ * commencer à jouer</b>
+ * <p>La classe fait le lien entre le modèle composé du package maze et la vu composée du package ui.
+ * Pour cela elle possède en attribut une instance de Window (vue) et une instance de Maze (modèle)</p>
+ * <p>La classe est appelée à chaque action de l'utilisateur sur le labyrinthe pour mettre à jour la
+ * fenêtre est la structure de donnée</p>
+ * 
+ * @see Maze
+ * @see Window
+ * 
+ * @author masschelier@telecom-paris.fr
+ *
+ */
 final public class MazeController {
 	private Maze maze;
 	private Window app;
@@ -18,34 +32,39 @@ final public class MazeController {
 	private boolean saved = true;
 	private String currentBoxLabel = "W";
 	
+	/**
+	 * Constructeur de MazeController, il instancie une fenêtre.</br>
+	 * maze reste null tant qu'il n'a pas été créé ou chargé.
+	 */
 	public MazeController() {
 		app = new Window(this);
 		panel = app.getDrawingPanel();
 	}
 	
-	public void setDrawingPanel(DrawingPanel panel) {
-		this.panel = panel;
-		panel.getDPMgr().setMaze(maze);
-		DrawingPanelMouseListener mouseListener = new DrawingPanelMouseListener(this);
-		panel.addMouseListener(mouseListener);
-		panel.addMouseMotionListener(mouseListener);
-	}
-	
+	/**
+	 * Setter pour currentBoxLabel.
+	 * @param label label de la boite à placer au prochain clic sur le DrawingPanel
+	 */
 	public void setCurrentBox(String label) {
 		currentBoxLabel = label;
 	}
 	
+	/**
+	 * Demande ses dimensions puis crée un nouveau labyrinthe rempli de cases vides.
+	 * @return true ssi le labyrinthe a pu être crée
+	 * @see MazeController#newVoidMaze(int, int)
+	 */
 	public boolean newVoidMaze() {
 		int height = 0;
 		int width = 0;
 		
 		try {
-			while (height <= 0 || height > 40) {
-				String heightS = JOptionPane.showInputDialog(app, "Hauteur de votre labyrinthe ? (40 Max)", "Hauteur", JOptionPane.QUESTION_MESSAGE);
+			while (height <= 0 || height > 100) {
+				String heightS = JOptionPane.showInputDialog(app, "Hauteur de votre labyrinthe ? (100 Max)", "Hauteur", JOptionPane.QUESTION_MESSAGE);
 				height = Integer.parseInt(heightS);
 			}
-			while (width<=0 || height >40) {
-				String widthS = JOptionPane.showInputDialog(app, "Largeur de votre labyrinthe ? (40 Max)", "Largeur", JOptionPane.QUESTION_MESSAGE);
+			while (width <=0 || height > 100) {
+				String widthS = JOptionPane.showInputDialog(app, "Largeur de votre labyrinthe ? (100 Max)", "Largeur", JOptionPane.QUESTION_MESSAGE);
 				width = Integer.parseInt(widthS);
 			}
 			return newVoidMaze(width, height);
@@ -56,6 +75,12 @@ final public class MazeController {
 		}
 	}
 	
+	/**
+	 * Crée un nouveau labyrinthe rempli de cases vides aux dimensions demandée
+	 * @param width largeur du labyrinthe
+	 * @param height hauteur du labyrinthe
+	 * @return true ssi le labyrinthe a pu être créé
+	 */
 	public boolean newVoidMaze(int width, int height) {
 		if(!checkSaved())
 			return false;
@@ -68,6 +93,12 @@ final public class MazeController {
 		return true;
 	}
 	
+	
+	/**
+	 * Si un labyrinthe existe déjà la fonction demande à le sauvegarder le rempli de cases aléatoires</br>
+	 * Sinon demande ses dimensions et crée un labyrinthe rempli de cases aléatoires
+	 * @return true ssi le labyrinthe a pu être créé
+	 */
 	public boolean newRandomMaze() {
 		if(maze == null) {
 			if(!newVoidMaze())
@@ -91,6 +122,10 @@ final public class MazeController {
 		return true;
 	}
 	
+	/**
+	 * Ouvre un fichier labyrinthe sur le disque.
+	 * @param filename Chemin vers le labyrinthe à ouvrir
+	 */
 	public void openMaze(String filename) {
 		try {
 			if(maze == null)
@@ -112,6 +147,10 @@ final public class MazeController {
 		}
 	}
 	
+	/**
+	 * Demande le chemin vers lequel sauvegarder si on ne le connait pas déjà,
+	 * puis sauvegarde le labyrinthe à cet emplacement.
+	 */
 	public void saveMaze() {
 		if(maze != null) {
 			if(hasFilename()) {
@@ -128,6 +167,10 @@ final public class MazeController {
 		}
 	}
 	
+	/**
+	 * Demande l'emplacement auquel enregistrer le labyrinthe avant de l'enregistrer.
+	 * @return Chemin absolu de l'emplacement auquel le labyrinthe a été enregistré
+	 */
 	public String saveAsMaze() {
 		String filename = null;
 		
@@ -148,6 +191,9 @@ final public class MazeController {
 		return filename;
 	}
 	
+	/**
+	 * Ferme le labyrinthe
+	 */
 	public void closeMaze() {
 		maze = null;
 		filename = null;
@@ -155,14 +201,26 @@ final public class MazeController {
 		updateMaze();
 	}
 	
+	/**
+	 * Renvoie vrai si on connait l'emplacement auquel se fera la prochaine sauvegarde
+	 * @return true ssi filename != null
+	 */
 	public boolean hasFilename() {
 		return filename != null;
 	}
 
+	/**
+	 * Renvoie vrai si le labyrinthe n'a pas besoin d'être enregistré
+	 * @return true ssi le labyrinthe n'a pas subit de modification depuis la dernière sauvegarde
+	 */
 	public boolean isSaved() {
 		return saved;
 	}
 	
+	/**
+	 * Vérifie que le labyrinthe a bien été enregistré
+	 * @return true ssi l'action en cours peut être continuée ie. on a pas appuyé sur Annuler
+	 */
 	public boolean checkSaved() {
 		if(!isSaved()) {
 			int answer = JOptionPane.showConfirmDialog(app, "Voulez-vous enregistrer le labyrinthe avant de le fermer ?");
@@ -174,12 +232,20 @@ final public class MazeController {
 		return true;
 	}
 	
+	/**
+	 * Méthode a appeler dès que le labyrinthe a été mis a jour pour le redessiner
+	 */
 	public void updateMaze() {
 		panel.getDPMgr().setMaze(maze);
 		panel.getDPMgr().setPath(null);
 		panel.notifyForUpdate();
 	}
 	
+	/**
+	 * Méthode appelée lorsque l'utilisateur demande à résoudre le labyrinthe.
+	 * Des tests sont effectués puis l'algorithme de Dijkstra est appliqué au labyrinthe.
+	 * Si celui-ci a une solution on l'affiche sur le DrawingPanel
+	 */
 	public void solve() {
 		if(maze == null) {
 			JOptionPane.showMessageDialog(app, "Aucun labyrinthe à résoudre", "Pas de labyrinthe", JOptionPane.ERROR_MESSAGE);
@@ -195,8 +261,7 @@ final public class MazeController {
 		}
 		
 		PreviousInterface prev = Dijkstra.dijkstra(maze, maze.getStart());
-		System.out.println(maze.getStart().getX() + ", " + maze.getStart().getY());
-		System.out.println(maze.getEnd().getX() + ", " + maze.getEnd().getY());
+		
 		if(prev.getFather(maze.getEnd()) == null) {
 			JOptionPane.showMessageDialog(app, "Le labyrinthe n'a pas de solution", "Labyrinthe insoluble", JOptionPane.ERROR_MESSAGE);
 			return;
@@ -208,6 +273,11 @@ final public class MazeController {
 		panel.notifyForUpdate();
 	}
 	
+	/**
+	 * Méthode appelée lors d'un clic sur le DrawingPanel pour mettre a jour le labyrinthe
+	 * @param x coordonnée x du clic en pixel
+	 * @param y coordonnée y du clic en pixel
+	 */
 	public void clickAt(int x, int y) {
 		if(maze == null)
 			return;
@@ -235,7 +305,17 @@ final public class MazeController {
 		saved = false;
 	}
 	
+	/**
+	 * @return maze
+	 */
 	public Maze getMaze() {
 		return maze;
+	}
+	
+	/**
+	 * @return app
+	 */
+	public Window getWindow() {
+		return app;
 	}
 }

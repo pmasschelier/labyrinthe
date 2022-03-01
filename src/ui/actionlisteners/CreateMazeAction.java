@@ -3,8 +3,13 @@ package ui.actionlisteners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import controller.MazeController;
+import main.MazeController;
 
+/**
+ * <b>Classe implémantant l'ActionListener qui répond à l'action "Créer un nouveau labyrinthe"</b>
+ * 
+ * @author masschelier@telecom-paris.fr
+ */
 final public class CreateMazeAction implements ActionListener {
 	
 	final MazeController mazectrl;

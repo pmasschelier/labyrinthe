@@ -4,6 +4,16 @@ import javax.swing.* ;
 
 import ui.actionlisteners.ChangeThemeAction;
 
+/**
+ * <b>Classe représentant le sous-menu permettant de choisir le thème de la fenêtre</b>
+ * <p>Le menu est généré automatiquement à partir des thèmes proposés par
+ * UIManager.getInstalledLookAndFeels()</p>
+ * 
+ * @see Window
+ *
+ * @author masschelier@telecom-paris.fr
+ *
+ */
 final public class ThemesMenuItem extends JMenu {
 	
 	private static final long serialVersionUID = 5576535944802200870L;

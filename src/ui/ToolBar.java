@@ -2,9 +2,8 @@ package ui;
 
 import javax.swing.JButton;
 import javax.swing.JToolBar;
-import javax.swing.UIManager;
 
-import controller.MazeController;
+import main.MazeController;
 import ui.actionlisteners.CloseAction;
 import ui.actionlisteners.CreateMazeAction;
 import ui.actionlisteners.CreateRandomMazeAction;
@@ -13,13 +12,30 @@ import ui.actionlisteners.OpenAction;
 import ui.actionlisteners.SaveAction;
 import ui.actionlisteners.SolveAction;
 
+/**
+ * <b>Classe représentant la barre d'outil de la fenêtre</b>
+ * <p>La barre d'outils contient 7 boutons :
+ * <ul>
+ * <li>Nouveau</li>
+ * <li>Ouvrir</li>
+ * <li>Enregistrer</li>
+ * <li>Fermer</li>
+ * <li>Aléatoire</li>
+ * <li>Effacer</li>
+ * <li>Résoudre</li>
+ * </ul>
+ * 
+ * @author masschelier@telecom-paris.fr
+ *
+ */
 final public class ToolBar extends JToolBar {
 
 	private static final long serialVersionUID = -350011054358769608L;
 	
-	JButton newButton, openButton, saveButton, closeButton, randomButton, clearButton, solveButton;
+	private final JButton newButton, openButton, saveButton, closeButton, randomButton, clearButton, solveButton;
 
-	public ToolBar(MazeController mazectrl, Window app) {
+	public ToolBar(MazeController mazectrl) {
+		
 		super();
 
 		newButton = new JButton(Window.icons.get("new"));
@@ -28,17 +44,17 @@ final public class ToolBar extends JToolBar {
 		add(newButton);
 		
 		openButton = new JButton(Window.icons.get("open"));
-		openButton.addActionListener(new OpenAction(mazectrl, app));
+		openButton.addActionListener(new OpenAction(mazectrl));
 		openButton.setToolTipText("Ouvrir un labyrinthe");
 		add(openButton);
 		
 		saveButton = new JButton(Window.icons.get("save"));
-		saveButton.addActionListener(new SaveAction(mazectrl, app));
+		saveButton.addActionListener(new SaveAction(mazectrl));
 		saveButton.setToolTipText("Enregistrer le labyrinthe");
 		add(saveButton);
 		
 		closeButton = new JButton(Window.icons.get("close"));
-		closeButton.addActionListener(new CloseAction(mazectrl, app));
+		closeButton.addActionListener(new CloseAction(mazectrl));
 		closeButton.setToolTipText("Fermer le labyrinthe");
 		add(closeButton);
 		

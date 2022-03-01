@@ -1,5 +1,11 @@
 package dijkstra;
 
+/**
+ * <b>Interface d'un tas de VertexInterface utilisé par l'algorithme de Dijkstra</b>
+ * 
+ * @author masschelier@telecom-paris.fr
+ *
+ */
 public interface HeapInterface {
 	
 	public VertexInterface pop();

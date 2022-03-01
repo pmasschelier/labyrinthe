@@ -3,8 +3,10 @@ package dijkstra;
 import java.util.HashMap;
 
 /**
- * Classe basée sur une HashMap servant à indiquer la distance d'un sommet 
- * pour l'algorithme de Dijkstra
+ * <b>Classe basée sur une HashMap servant à indiquer la distance d'un sommet 
+ * pour l'algorithme de Dijkstra</b>
+ * 
+ * @author masschelier@telecom-paris.fr
  */
 public final class Pi implements PiInterface {
 	private HashMap<VertexInterface, Integer> pi;
