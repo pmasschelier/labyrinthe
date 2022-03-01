@@ -16,6 +16,6 @@ make doc
 #Fonctionnalités
 
 
-!(resources/gitlab/interface0.png "Interface de l'application au lancement")
-!(resources/gitlab/interface1.png "Labyrinthe")
-!(resources/gitlab/interface2.png "Solution du labyrinthe")
+![](resources/gitlab/interface0.png "Interface de l'application au lancement")
+![](resources/gitlab/interface1.png "Labyrinthe")
+![](resources/gitlab/interface2.png "Solution du labyrinthe")
