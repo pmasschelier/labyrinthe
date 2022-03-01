@@ -16,11 +16,16 @@ make doc
 # Fonctionnalités
 
 Interface de l'application au lancement :
+
 ![](resources/gitlab/interface0.png "Interface de l'application au lancement")
+
 On peut ensuite soit dessiner un labyrinthe en séléctionnant la case à dessiner à chaque fois avec les boutons radio situés en bas de la fenêtre.
 Ou bien on charge un labyrinthe sur le disque à l'aide du menu Fichier > Ouvrir
+
 ![](resources/gitlab/interface1.png "Labyrinthe")
+
 On peut résoudre le labyrinthe en cliquant sur le bouton "Solution"
+
 ![](resources/gitlab/interface2.png "Solution du labyrinthe")
 
 ## Autre fonctionnalités :
