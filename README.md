@@ -12,3 +12,10 @@ Pour créer la documentation (entrée : doc/index.html) :
 ```
 make doc
 ```
+
+#Fonctionnalités
+
+
+!(resources/gitlab/interface0.png "Interface de l'application au lancement")
+!(resources/gitlab/interface1.png "Labyrinthe")
+!(resources/gitlab/interface2.png "Solution du labyrinthe")

@@ -44,6 +44,7 @@ final public class MenuBar extends JMenuBar
 		super() ;
 
 		fileMenu = new JMenu("Fichier");
+		fileMenu.setMnemonic(KeyEvent.VK_F);
 		
 		newItem = new JMenuItem("Nouveau", Window.icons.get("new"));
 		newItem.setMnemonic(KeyEvent.VK_N);
@@ -77,6 +78,7 @@ final public class MenuBar extends JMenuBar
 		add(fileMenu);
 		
 		mazeMenu = new JMenu("Labyrinthe");
+		mazeMenu.setMnemonic(KeyEvent.VK_L);
 
 		solveItem = new JMenuItem("Résoudre", Window.icons.get("apply"));
 		solveItem.setMnemonic(KeyEvent.VK_R);
@@ -94,6 +96,7 @@ final public class MenuBar extends JMenuBar
 		add(mazeMenu);
 		
 		showMenu = new JMenu("Affichage");
+		showMenu.setMnemonic(KeyEvent.VK_A);
 		
 		styleMenu = new ThemesMenuItem(mazectrl.getWindow());
 		showMenu.add(styleMenu);
