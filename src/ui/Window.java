@@ -52,14 +52,14 @@ final public class Window extends JFrame implements WindowListener {
 		
 		this.mazectrl = mazectrl;
 		
-		setJMenuBar(new MenuBar(mazectrl));
+		setJMenuBar(new MenuBar(mazectrl, this));
 		//setLayout(new BorderLayout()); // BorderLayout est déjà le layout par défaut d'une fenêtre swing
 		
 		add(new ToolBar(mazectrl), BorderLayout.NORTH);
 		
 		add(drawingPanel = new DrawingPanel(mazectrl), BorderLayout.CENTER);
 
-		add(new SidePanel(mazectrl), BorderLayout.SOUTH);
+		add(new BoxChoserPanel(mazectrl), BorderLayout.SOUTH);
 
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		addWindowListener(this);
@@ -104,6 +104,10 @@ final public class Window extends JFrame implements WindowListener {
 		
 		return null;
 	}
+	
+	public Color getColor(Color initial) {
+		return JColorChooser.showDialog(this,"Choisissez une couleur", initial);
+	}
 
 	@Override
 	public void windowOpened(WindowEvent e) {
@@ -117,8 +121,7 @@ final public class Window extends JFrame implements WindowListener {
 	@Override
 	public void windowClosing(WindowEvent e) {
 		if (mazectrl.checkSaved())
-			System.exit(0);
-		
+			dispose();
 	}
 
 	@Override

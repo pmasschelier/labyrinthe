@@ -39,7 +39,7 @@ final public class MenuBar extends JMenuBar
 	 * Constructeur de MenuBar, crée les menu et les items de menu
 	 * @param mazectrl instance de MazeController qui sera appelée en réaction aux clics.
 	 */
-	public MenuBar(MazeController mazectrl)
+	public MenuBar(MazeController mazectrl, Window window)
 	{
 		super() ;
 
@@ -98,10 +98,11 @@ final public class MenuBar extends JMenuBar
 		showMenu = new JMenu("Affichage");
 		showMenu.setMnemonic(KeyEvent.VK_A);
 		
-		styleMenu = new ThemesMenuItem(mazectrl.getWindow());
+		styleMenu = new ThemesMenuItem(window);
 		showMenu.add(styleMenu);
 		
 		tilesetItem = new JMenuItem("Tileset");
+		tilesetItem.addActionListener(new TileChooserAction(mazectrl, window));
 		showMenu.add(tilesetItem);
 		add(showMenu);
 		

@@ -25,9 +25,11 @@ final public class DrawingPanelManager {
 	private Maze maze = null;
 	private ArrayDeque<VertexInterface> path = null;
 	
-	static final HashMap<String, Color> tilesColors;
-	
-	static {
+	private final HashMap<String, Color> tilesColors;
+
+	DrawingPanelManager(DrawingPanel panel) {
+		this.panel = panel;
+		
 		tilesColors = new HashMap<String, Color>();
 		tilesColors.put("A", Color.YELLOW);
 		tilesColors.put("D", Color.BLUE);
@@ -35,9 +37,8 @@ final public class DrawingPanelManager {
 		tilesColors.put("E", Color.WHITE);
 	}
 	
-	
-	DrawingPanelManager(DrawingPanel panel) {
-		this.panel = panel;
+	public HashMap<String, Color> getTilesColors() {
+		return tilesColors;
 	}
 	
 	/**

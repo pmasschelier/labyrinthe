@@ -3,13 +3,15 @@ package ui;
 import javax.swing.*;
 
 import main.MazeController;
+import ui.actionlisteners.SolveAction;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.FlowLayout;
 
 /**
  * <b> BoxChoserPanel est la classe représentant le panneau de boutons radios qui
- * permet de choisir la case de labyrinthe que l'on va poser </b>
+ * permet de choisir la case de labyrinthe que l'on va poser et de le résoudre. </b>
  * <p>
  * Les quatre boutons radios contenu dans le panneau sont :
  * <ul>
@@ -18,6 +20,7 @@ import java.awt.event.ActionListener;
  * <li>Le bouton "Départ"</li>
  * <li>Le bouton "Arrivé"</li>
  * </ul>
+ * Suivis d'un bouton simple pour résoudre le labyrinthe
  * </p>
  * <p>Dès que la séléction est changé on notifie le controlleur</p>
  * 
@@ -29,6 +32,7 @@ final public class BoxChoserPanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -8032292675876438992L;
 	
 	private final JRadioButton buttonWall, buttonEmpty, buttonDeparture, buttonArrival;
+	private final JButton solveButton;
 	private final ButtonGroup group;
 	private final MazeController mazectrl;
 	
@@ -39,7 +43,7 @@ final public class BoxChoserPanel extends JPanel implements ActionListener {
 	public BoxChoserPanel(MazeController mazectrl) {
 		this.mazectrl = mazectrl;
 		
-		// this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+		this.setLayout(new FlowLayout(FlowLayout.LEFT));
 		
 		add( buttonWall = new JRadioButton("Mur") );
 		buttonWall.setActionCommand("W");
@@ -62,6 +66,12 @@ final public class BoxChoserPanel extends JPanel implements ActionListener {
 		buttonEmpty.addActionListener(this);
 		buttonDeparture.addActionListener(this);
 		buttonArrival.addActionListener(this);
+		
+		
+		// Bouton solution
+		
+		add(solveButton = new JButton("Solution"));
+		solveButton.addActionListener(new SolveAction(mazectrl));
 	}
 	
 	/**
