@@ -27,7 +27,7 @@ final public class DrawingPanelManager {
 	
 	private final HashMap<String, Color> tilesColors;
 
-	DrawingPanelManager(DrawingPanel panel) {
+	public DrawingPanelManager(DrawingPanel panel) {
 		this.panel = panel;
 		
 		tilesColors = new HashMap<String, Color>();
@@ -35,6 +35,7 @@ final public class DrawingPanelManager {
 		tilesColors.put("D", Color.BLUE);
 		tilesColors.put("W", Color.BLACK);
 		tilesColors.put("E", Color.WHITE);
+		tilesColors.put(".", Color.RED);
 	}
 	
 	public HashMap<String, Color> getTilesColors() {
@@ -82,7 +83,7 @@ final public class DrawingPanelManager {
 			int w = panel.getWidth() / maze.getSizeX();
 			int h = panel.getHeight() / maze.getSizeY();
 		
-			g.setColor(Color.RED);
+			g.setColor(tilesColors.get("."));
 			boolean first = true;
 			for(VertexInterface coord : path) {
 				if(first) {

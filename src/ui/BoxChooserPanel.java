@@ -27,7 +27,7 @@ import java.awt.FlowLayout;
  * @author masschelier@telecom-paris.fr
  *
  */
-final public class BoxChoserPanel extends JPanel implements ActionListener {
+final public class BoxChooserPanel extends JPanel implements ActionListener {
 	
 	private static final long serialVersionUID = -8032292675876438992L;
 	
@@ -40,7 +40,7 @@ final public class BoxChoserPanel extends JPanel implements ActionListener {
 	 * Constructeur de la classe BoxChoserPanel
 	 * @param mazectrl Controlleur à notifier lors du changement de séléction
 	 */
-	public BoxChoserPanel(MazeController mazectrl) {
+	public BoxChooserPanel(MazeController mazectrl) {
 		this.mazectrl = mazectrl;
 		
 		this.setLayout(new FlowLayout(FlowLayout.LEFT));

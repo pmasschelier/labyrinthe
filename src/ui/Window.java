@@ -59,7 +59,7 @@ final public class Window extends JFrame implements WindowListener {
 		
 		add(drawingPanel = new DrawingPanel(mazectrl), BorderLayout.CENTER);
 
-		add(new BoxChoserPanel(mazectrl), BorderLayout.SOUTH);
+		add(new BoxChooserPanel(mazectrl), BorderLayout.SOUTH);
 
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		addWindowListener(this);

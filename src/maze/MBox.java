@@ -10,6 +10,13 @@ import dijkstra.VertexInterface;
  */
 public abstract class MBox implements VertexInterface {
 	
+	// Coordonnées dans le labyrinthe
+	private int x, y;
+	// Nom de la case
+	private String label;
+	// La case peut-elle être traversée
+	private boolean accessible;
+	
 	MBox(String label, boolean accessible, int x, int y) {
 		this.label = new String(label);
 		this.accessible = accessible;
@@ -36,11 +43,5 @@ public abstract class MBox implements VertexInterface {
 	public final boolean isAccessible() {
 		return accessible;
 	}
-	
-	// Coordonnées dans le labyrinthe
-	private int x, y;
-	// Nom de la case
-	private String label;
-	// La case peut-elle être traversée
-	private boolean accessible;
+
 }

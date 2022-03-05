@@ -16,6 +16,15 @@ import main.MazeController;
 import ui.DrawingPanel;
 import ui.Window;
 
+/**
+ * <b>Classe représentant la boîte de dialogue pour séléctionner les couleurs des cases</b>
+ * <p>La boite de dialogue affiche des panneaux cliquable affichant la couleur des cases.</p>
+ * 
+ * @see TileColorPanel
+ * 
+ * @author masschelier@telecom-paris.fr
+ *
+ */
 public class TileChooserDialog extends JDialog {
 	
 	private TileColorPanel colorDisplay;
@@ -24,8 +33,12 @@ public class TileChooserDialog extends JDialog {
 	
 	private static final long serialVersionUID = 8144284915221919277L;
 
-	public TileChooserDialog(MazeController mazectrl, Window window) {
-		super(window, "Choisissez la couleur des cases", true);
+	/**
+	 * Constructeur de TileChooserDialog
+	 * @param mazectrl controller de l'application
+	 */
+	public TileChooserDialog(MazeController mazectrl) {
+		super(mazectrl.getWindow(), "Choisissez la couleur des cases", true);
 		
 		setLayout(new BoxLayout(this.getContentPane(), BoxLayout.PAGE_AXIS));
 		

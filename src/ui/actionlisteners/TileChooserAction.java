@@ -8,6 +8,12 @@ import main.MazeController;
 import ui.Window;
 import ui.tilechooser.TileChooserDialog;
 
+/**
+ * <b>Classe implémantant l'ActionListener qui répond à l'action "Changer le Tileset"</b>
+ * 
+ * @author masschelier@telecom-paris.fr
+ *
+ */
 public class TileChooserAction implements ActionListener {
 	
 	private final Window window;
@@ -19,6 +25,6 @@ public class TileChooserAction implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		new TileChooserDialog(mazectrl, window);
+		new TileChooserDialog(mazectrl);
 	}
 }

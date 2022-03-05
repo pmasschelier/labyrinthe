@@ -12,4 +12,5 @@ public interface VertexInterface {
 	public int getY();
 	
 	public String getLabel();
+	
 }

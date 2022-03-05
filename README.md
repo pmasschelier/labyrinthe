@@ -28,6 +28,10 @@ On peut résoudre le labyrinthe en cliquant sur le bouton "Solution"
 
 ![](resources/gitlab/interface2.png "Solution du labyrinthe")
 
+On peut choisir la couleur des cases
+
+![](resources/gitlab/interface3.png "Séléction des couleurs des cases")
+
 ## Autre fonctionnalités :
 - Enregistrer un labyrinthe sur le disque
 - Fermer ou effacer un labyrinther
