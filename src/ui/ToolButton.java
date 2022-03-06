@@ -2,6 +2,7 @@ package ui;
 
 import java.awt.event.ActionListener;
 import java.awt.Dimension;
+import java.awt.Insets;
 
 import javax.swing.Icon;
 import javax.swing.JButton;
@@ -14,7 +15,8 @@ public class ToolButton extends JButton {
 		super(icon);
 		setToolTipText(tooltipText);
 		addActionListener(action);
-		//setPreferredSize(new Dimension(100, 100));
+		final int a = 7;
+		setMargin(new Insets(a, a, a, a));
 	}
 
 }
