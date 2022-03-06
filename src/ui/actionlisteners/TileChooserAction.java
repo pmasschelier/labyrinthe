@@ -14,13 +14,11 @@ import ui.tilechooser.TileChooserDialog;
  * @author masschelier@telecom-paris.fr
  *
  */
-public class TileChooserAction implements ActionListener {
+final public class TileChooserAction implements ActionListener {
 	
-	private final Window window;
 	private final MazeController mazectrl;
 	
 	public TileChooserAction(MazeController mazectrl, Window window) {
-		this.window = window;
 		this.mazectrl = mazectrl;
 	}
 

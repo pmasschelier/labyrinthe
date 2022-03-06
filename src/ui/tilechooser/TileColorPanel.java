@@ -18,11 +18,11 @@ import main.MazeController;
  * 
  * @author masschelier@telecom-paris.fr
  */
-public class TileColorPanel extends JPanel {
+final public class TileColorPanel extends JPanel {
 
 	private static final long serialVersionUID = 2007527143610547554L;
 	
-	private TileColorDisplay wallPanel, emptyPanel, departurePanel, arrivalPanel, pathPanel;
+	private final TileColorDisplay wallPanel, emptyPanel, departurePanel, arrivalPanel, pathPanel;
 	
 	/**
 	 * Constructeur de TileColorPanel

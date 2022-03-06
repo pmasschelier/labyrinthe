@@ -12,7 +12,6 @@ import main.MazeController;
 
 final public class EraseAction implements ActionListener {
 	
-
 	final MazeController mazectrl;
 
 	public EraseAction(MazeController mazectrl) {

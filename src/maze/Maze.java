@@ -1,4 +1,4 @@
-package maze;
+	package maze;
 
 import java.util.ArrayList;
 
@@ -76,14 +76,15 @@ public final class Maze implements GraphInterface {
 	 */
 	public final void loadFromFile(String filename) throws FileNotFoundException, IOException, MazeReadingException {
 		BufferedReader in = null;
-		vertices = new ArrayList<>();
+		ArrayList<MBox> verticestmp = new ArrayList<>();
+		DBox starttmp = null;
+		ABox endtmp = null;
 		
 		in = new BufferedReader(new FileReader(filename));
 		int i = 0;
 		boolean firstLine = true;
-		boolean startSet = false;
-		boolean endSet = false;
 		
+		int sizeLine = 0;
 
 		String line;
 		
@@ -91,38 +92,36 @@ public final class Maze implements GraphInterface {
 		{
 			int length = line.length();
 			if(firstLine)
-				sizeX = length;
+				sizeLine = length;
 			else {
-				if(length != sizeX) {
+				if(length != sizeLine) {
 					in.close();
 					throw new MazeReadingException(filename, i, "Nombre de colonnes incorrect");
 				}
 			}
-			for(int j = 0; j < sizeX; j++) {
+			for(int j = 0; j < sizeLine; j++) {
 				switch (line.charAt(j)) {
 				case 'A' :
-					if(endSet) {
+					if(endtmp != null) {
 						in.close();
 						throw new MazeReadingException(filename, i-1, "Plusieurs arrivées trouvées");
 					}
-					end = new ABox(j, i);
-					endSet = true;
-					vertices.add(end);
+					endtmp = new ABox(j, i);
+					verticestmp.add(endtmp);
 					break;
 				case 'E' :
-					this.vertices.add(new EBox(j, i));
+					verticestmp.add(new EBox(j, i));
 					break;
 				case 'W' :
-					vertices.add(new WBox(j, i));
+					verticestmp.add(new WBox(j, i));
 					break;
 				case 'D' :
-					if(startSet) {
+					if(starttmp != null) {
 						in.close();
 						throw new MazeReadingException(filename, i-1, "Plusieurs départs trouvés");
 					}
-					start = new DBox(j, i);
-					startSet = true;
-					vertices.add(start);
+					starttmp = new DBox(j, i);
+					verticestmp.add(starttmp);
 					break;
 				default :
 					in.close();
@@ -132,10 +131,14 @@ public final class Maze implements GraphInterface {
 			i++;
 			firstLine = false;
 		}
-		sizeY = i;
-		
-
 		in.close();
+		
+		sizeX = sizeLine;
+		sizeY = i;
+		vertices = verticestmp;
+		start = starttmp;
+		end = endtmp;
+
 	}
 	
 	/** Enregistre le labyrinthe dans un fichier

@@ -40,4 +40,4 @@ doc:
 	@cd $(SRCDIR); javadoc -d ../$@ $(SRC)
 
 clean:
-	rm -rf $(EXEC) $(CLASSDIR)
+	rm -rf $(EXEC) $(CLASSDIR) doc

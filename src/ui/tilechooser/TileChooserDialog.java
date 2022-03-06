@@ -24,13 +24,13 @@ import ui.DrawingPanel;
  * @author masschelier@telecom-paris.fr
  *
  */
-public class TileChooserDialog extends JDialog {
-	
-	private TileColorPanel colorDisplay;
-	private JButton cancelButton, applyButton;
-	private JPanel buttonPanel;
+final public class TileChooserDialog extends JDialog {
 	
 	private static final long serialVersionUID = 8144284915221919277L;
+	
+	final private TileColorPanel colorDisplay;
+	final private JButton cancelButton, applyButton;
+	final private JPanel buttonPanel;
 
 	/**
 	 * Constructeur de TileChooserDialog

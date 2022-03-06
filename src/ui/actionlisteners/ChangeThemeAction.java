@@ -14,9 +14,9 @@ import ui.Window;
  * 
  * @author masschelier@telecom-paris.fr
  */
-public class ChangeThemeAction implements ActionListener {
-	UIManager.LookAndFeelInfo info;
-	Window app;
+final public class ChangeThemeAction implements ActionListener {
+	final UIManager.LookAndFeelInfo info;
+	final Window app;
 	
 	public ChangeThemeAction(UIManager.LookAndFeelInfo info, Window app) {
 		this.info = info;

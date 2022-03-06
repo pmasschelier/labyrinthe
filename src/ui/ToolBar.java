@@ -38,39 +38,25 @@ final public class ToolBar extends JToolBar {
 		
 		super();
 
-		newButton = new JButton(Window.icons.get("new"));
-		newButton.addActionListener(new CreateMazeAction(mazectrl));
-		newButton.setToolTipText("Nouveau labyrinthe");
+		newButton = new ToolButton(Window.icons.get("new"), "Nouveau labyrinthe", new CreateMazeAction(mazectrl));
 		add(newButton);
-		
-		openButton = new JButton(Window.icons.get("open"));
-		openButton.addActionListener(new OpenAction(mazectrl));
-		openButton.setToolTipText("Ouvrir un labyrinthe");
+
+		openButton = new ToolButton(Window.icons.get("open"), "Ouvrir le labyrinthe", new OpenAction(mazectrl));
 		add(openButton);
-		
-		saveButton = new JButton(Window.icons.get("save"));
-		saveButton.addActionListener(new SaveAction(mazectrl));
-		saveButton.setToolTipText("Enregistrer le labyrinthe");
+
+		saveButton = new ToolButton(Window.icons.get("save"), "Enregistrer le labyrinthe", new SaveAction(mazectrl));
 		add(saveButton);
-		
-		closeButton = new JButton(Window.icons.get("close"));
-		closeButton.addActionListener(new CloseAction(mazectrl));
-		closeButton.setToolTipText("Fermer le labyrinthe");
+
+		closeButton = new ToolButton(Window.icons.get("close"), "Fermer le labyrinthe", new CloseAction(mazectrl));
 		add(closeButton);
-		
-		randomButton = new JButton(Window.icons.get("random"));
-		randomButton.addActionListener(new CreateRandomMazeAction(mazectrl));
-		randomButton.setToolTipText("Remplir aléatoirement le labyrinthe");
+
+		randomButton = new ToolButton(Window.icons.get("random"), "Remplir aléatoirement le labyrinthe", new CreateRandomMazeAction(mazectrl));
 		add(randomButton);
-		
-		clearButton = new JButton(Window.icons.get("clear"));
-		clearButton.addActionListener(new EraseAction(mazectrl));
-		clearButton.setToolTipText("Effacer le labyrinthe");
+
+		clearButton = new ToolButton(Window.icons.get("clear"), "Effacer le labyrinthe", new EraseAction(mazectrl));
 		add(clearButton);
-		
-		solveButton = new JButton(Window.icons.get("apply"));
-		solveButton.addActionListener(new SolveAction(mazectrl));
-		solveButton.setToolTipText("Résoudre le labyrinthe");
+
+		solveButton = new ToolButton(Window.icons.get("apply"), "Résoudre le labyrinthe", new SolveAction(mazectrl));
 		add(solveButton);
 	}
 }

@@ -20,7 +20,7 @@ import java.util.HashMap;
  * @see MenuBar
  * @see ToolBar
  * @see DrawingPanel
- * @see SidePanel
+ * @see BoxChooserPanel
  * @see MazeController
  * 
  * @author masschelier@telecom-paris.fr

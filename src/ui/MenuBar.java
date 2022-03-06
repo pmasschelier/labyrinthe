@@ -50,16 +50,16 @@ final public class MenuBar extends JMenuBar
 		fileMenu.add(newItem);
 		
 		openItem = new MenuItem("Ouvrir", Window.icons.get("open"), KeyEvent.VK_O, new OpenAction(mazectrl));
-		fileMenu.add(newItem);
+		fileMenu.add(openItem);
 		
 		saveItem = new MenuItem("Enregistrer", Window.icons.get("save"), KeyEvent.VK_S, new SaveAction(mazectrl));
 		fileMenu.add(saveItem);
 		
 		saveAsItem = new MenuItem("Enregistrer sous", null, 0, new SaveAsAction(mazectrl));
-		fileMenu.add(newItem);
+		fileMenu.add(saveAsItem);
 		
 		closeItem = new MenuItem("Fermer", Window.icons.get("close"), KeyEvent.VK_C, new CloseAction(mazectrl));
-		fileMenu.add(newItem);
+		fileMenu.add(closeItem);
 		
 		quitItem = new MenuItem("Quitter", null, KeyEvent.VK_Q, new QuitAction(mazectrl));
 		fileMenu.add(quitItem);
@@ -73,7 +73,7 @@ final public class MenuBar extends JMenuBar
 		mazeMenu.add(solveItem);
 
 
-		randomItem = new MenuItem("Aléatoire", Window.icons.get("apply"), 0, new SolveAction(mazectrl));
+		randomItem = new MenuItem("Aléatoire", Window.icons.get("random"), 0, new SolveAction(mazectrl));
 		mazeMenu.add(randomItem);
 
 
