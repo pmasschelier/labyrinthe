@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 
 import main.MazeController;
 import ui.DrawingPanel;
-import ui.Window;
 
 /**
  * <b>Classe représentant la boîte de dialogue pour séléctionner les couleurs des cases</b>
@@ -54,9 +53,11 @@ public class TileChooserDialog extends JDialog {
 				dispose();
 			}
 		});
+		
 		cancelButton.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 		
 		buttonPanel.add(applyButton = new JButton("Appliquer et Fermer"));
+		
 		applyButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DrawingPanel panel = mazectrl.getWindow().getDrawingPanel();

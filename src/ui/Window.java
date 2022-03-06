@@ -82,6 +82,16 @@ final public class Window extends JFrame implements WindowListener {
 	}
 	
 	/**
+	 * @param title
+	 * @param msg
+	 * @return
+	 */
+	public int getValue(String title, String msg) {
+		String widthS = JOptionPane.showInputDialog(this, msg, title, JOptionPane.QUESTION_MESSAGE);
+		return Integer.parseInt(widthS);
+	}
+	
+	/**
 	 * Affiche une fenêtre permettant de choisir un fichier sur le disque
 	 * @param title Titre de la fenêtre
 	 * @return Chemin absolu du fichier séléctionné ou null si aucun fichier n'a été séléctionné

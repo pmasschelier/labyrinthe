@@ -46,33 +46,22 @@ final public class MenuBar extends JMenuBar
 		fileMenu = new JMenu("Fichier");
 		fileMenu.setMnemonic(KeyEvent.VK_F);
 		
-		newItem = new JMenuItem("Nouveau", Window.icons.get("new"));
-		newItem.setMnemonic(KeyEvent.VK_N);
-		newItem.addActionListener(new CreateMazeAction(mazectrl));
+		newItem = new MenuItem("Nouveau", Window.icons.get("new"), KeyEvent.VK_N, new CreateMazeAction(mazectrl));
 		fileMenu.add(newItem);
 		
-		openItem = new JMenuItem("Ouvrir", Window.icons.get("open"));
-		openItem.setMnemonic(KeyEvent.VK_O);
-		openItem.addActionListener(new OpenAction(mazectrl));
-		fileMenu.add(openItem);
+		openItem = new MenuItem("Ouvrir", Window.icons.get("open"), KeyEvent.VK_O, new OpenAction(mazectrl));
+		fileMenu.add(newItem);
 		
-		saveItem = new JMenuItem("Enregistrer", Window.icons.get("save"));
-		saveItem.setMnemonic(KeyEvent.VK_S);
-		saveItem.addActionListener(new SaveAction(mazectrl));
+		saveItem = new MenuItem("Enregistrer", Window.icons.get("save"), KeyEvent.VK_S, new SaveAction(mazectrl));
 		fileMenu.add(saveItem);
 		
-		saveAsItem = new JMenuItem("Enregistrer sous");
-		saveAsItem.addActionListener(new SaveAsAction(mazectrl));
-		fileMenu.add(saveAsItem);
+		saveAsItem = new MenuItem("Enregistrer sous", null, 0, new SaveAsAction(mazectrl));
+		fileMenu.add(newItem);
 		
-		closeItem = new JMenuItem("Fermer", Window.icons.get("close"));
-		closeItem.setMnemonic(KeyEvent.VK_C);
-		closeItem.addActionListener(new CloseAction(mazectrl));
-		fileMenu.add(closeItem);
+		closeItem = new MenuItem("Fermer", Window.icons.get("close"), KeyEvent.VK_C, new CloseAction(mazectrl));
+		fileMenu.add(newItem);
 		
-		quitItem = new JMenuItem("Quitter");
-		quitItem.setMnemonic(KeyEvent.VK_Q);
-		quitItem.addActionListener(new QuitAction(mazectrl));
+		quitItem = new MenuItem("Quitter", null, KeyEvent.VK_Q, new QuitAction(mazectrl));
 		fileMenu.add(quitItem);
 		
 		add(fileMenu);
@@ -80,17 +69,15 @@ final public class MenuBar extends JMenuBar
 		mazeMenu = new JMenu("Labyrinthe");
 		mazeMenu.setMnemonic(KeyEvent.VK_L);
 
-		solveItem = new JMenuItem("Résoudre", Window.icons.get("apply"));
-		solveItem.setMnemonic(KeyEvent.VK_R);
-		solveItem.addActionListener(new SolveAction(mazectrl));
+		solveItem = new MenuItem("Résoudre", Window.icons.get("apply"), KeyEvent.VK_R, new SolveAction(mazectrl));
 		mazeMenu.add(solveItem);
 
-		randomItem = new JMenuItem("Aléatoire", Window.icons.get("random"));
-		randomItem.addActionListener(new CreateRandomMazeAction(mazectrl));
+
+		randomItem = new MenuItem("Aléatoire", Window.icons.get("apply"), 0, new SolveAction(mazectrl));
 		mazeMenu.add(randomItem);
 
-		eraseItem = new JMenuItem("Effacer", Window.icons.get("clear"));
-		eraseItem.addActionListener(new EraseAction(mazectrl));
+
+		eraseItem = new MenuItem("Effacer", Window.icons.get("clear"), 0, new SolveAction(mazectrl));
 		mazeMenu.add(eraseItem);
 		
 		add(mazeMenu);
@@ -101,8 +88,7 @@ final public class MenuBar extends JMenuBar
 		styleMenu = new ThemesMenuItem(window);
 		showMenu.add(styleMenu);
 		
-		tilesetItem = new JMenuItem("Tileset");
-		tilesetItem.addActionListener(new TileChooserAction(mazectrl, window));
+		tilesetItem = new MenuItem("Tileset", null, 0, new TileChooserAction(mazectrl, window));
 		showMenu.add(tilesetItem);
 		add(showMenu);
 		

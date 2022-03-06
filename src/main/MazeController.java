@@ -21,6 +21,7 @@ import ui.*;
  * @see Maze
  * @see Window
  * 
+ * 
  * @author masschelier@telecom-paris.fr
  *
  */
@@ -59,14 +60,10 @@ final public class MazeController {
 		int width = 0;
 		
 		try {
-			while (height <= 0 || height > 100) {
-				String heightS = JOptionPane.showInputDialog(app, "Hauteur de votre labyrinthe ? (100 Max)", "Hauteur", JOptionPane.QUESTION_MESSAGE);
-				height = Integer.parseInt(heightS);
-			}
-			while (width <=0 || height > 100) {
-				String widthS = JOptionPane.showInputDialog(app, "Largeur de votre labyrinthe ? (100 Max)", "Largeur", JOptionPane.QUESTION_MESSAGE);
-				width = Integer.parseInt(widthS);
-			}
+			while (height <= 0 || height > 100)
+				height = app.getValue("Hauteur", "Hauteur de votre labyrinthe ? (100 Max)");
+			while (width <= 0 || height > 100)
+				width = app.getValue("Largeur", "Largeur de votre labyrinthe ? (100 Max)");
 			return newVoidMaze(width, height);
 		}
 		catch (Exception exc) {

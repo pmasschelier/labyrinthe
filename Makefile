@@ -26,10 +26,10 @@ $(CLASSDIR):
 	mkdir -p $(CLASSDIR)
 
 $(CLASSDIR)/%.class:$(SRCDIR)/%.java $(CLASSDIR)
-	$(JC) -d $(CLASSDIR) $(JFLAGS) $<
+	@$(JC) -d $(CLASSDIR) $(JFLAGS) $<
 
 $(EXEC): $(CLASSES:%=$(CLASSDIR)/%)
-	@cd $(CLASSDIR); jar -cfe ../$@ $(MAIN) $(CLASSES)
+	cd $(CLASSDIR); jar -cef $(MAIN) ../$@ .
 
 .PHONY: run clean doc
 

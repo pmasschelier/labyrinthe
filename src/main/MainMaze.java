@@ -6,4 +6,4 @@ public class MainMaze {
 		new MazeController();
 	}
 }
- 
+
