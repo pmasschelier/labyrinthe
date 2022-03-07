@@ -73,7 +73,7 @@ final public class MenuBar extends JMenuBar
 		mazeMenu.add(solveItem);
 
 
-		randomItem = new MenuItem("Aléatoire", Window.icons.get("random"), 0, new SolveAction(mazectrl));
+		randomItem = new MenuItem("Aléatoire", Window.icons.get("random"), 0, new CreateRandomMazeAction(mazectrl));
 		mazeMenu.add(randomItem);
 
 
