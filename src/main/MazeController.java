@@ -279,8 +279,8 @@ final public class MazeController {
 		if(maze == null)
 			return;
 		
-		int xi = x * maze.getSizeX() / panel.getWidth();
-		int yi = y * maze.getSizeY() / panel.getHeight();
+		int xi = x / (panel.getWidth() / maze.getSizeX());
+		int yi = y / (panel.getHeight() / maze.getSizeY());
 		
 		switch(currentBoxLabel) {
 		case "E":
