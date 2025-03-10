@@ -29,6 +29,8 @@ $(CLASSDIR)/%.class:$(SRCDIR)/%.java $(CLASSDIR)
 	@$(JC) -d $(CLASSDIR) $(JFLAGS) $<
 
 $(EXEC): $(CLASSES:%=$(CLASSDIR)/%)
+	mkdir -p $(CLASSDIR)/resources
+	cp -r resources/icons $(CLASSDIR)/resources
 	cd $(CLASSDIR); jar -cef $(MAIN) ../$@ .
 
 .PHONY: run clean doc
